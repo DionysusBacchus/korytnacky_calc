@@ -8,7 +8,7 @@ Autori
 ------
 
 Nazev tymu
-- xlogin01 jmeno prijmeni 
+- xkhrys00 Dziyana Khrystsiuk
 - xlebed12 Polina Lebedeva 
 - xlogin03 jmeno prijmeni 
 - xlogin04 jmeno prijmeni 
