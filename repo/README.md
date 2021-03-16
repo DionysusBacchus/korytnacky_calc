@@ -16,4 +16,4 @@ Nazev tymu
 Licence
 -------
 
-Tento program je poskytovan...
+Tento program je poskytovan GPL-2.0
