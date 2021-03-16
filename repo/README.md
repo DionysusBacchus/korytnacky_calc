@@ -6,8 +6,8 @@ Ubuntu 64bit
 Autori
 ------
 
-Nazev tymu 
-=======
+Nazev Týmu: Korytnacky 
+------
 - xkhrys00 Dziyana Khrystsiuk
 - xlebed12 Polina Lebedeva 
 - xsikul15 Jakub Sikula 
