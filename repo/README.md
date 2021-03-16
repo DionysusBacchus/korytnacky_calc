@@ -9,7 +9,7 @@ Autori
 
 Nazev tymu
 - xlogin01 jmeno prijmeni 
-- xlogin02 jmeno prijmeni 
+- xlebed12 Polina Lebedeva 
 - xlogin03 jmeno prijmeni 
 - xlogin04 jmeno prijmeni 
 
