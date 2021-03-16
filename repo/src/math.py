@@ -4,7 +4,7 @@
 This package contains declarations for math functions: +,-,*,/,!,^,^-1/x,... 
 """
 def factorial(n):
- 	if n == 0:
+	if n == 0:
 		return 1
 	else:
 		return n * factorial(n - 1)
@@ -15,9 +15,9 @@ def add(a,b):
 def sub(a,b):
 	return a-b
 
-def mul(a,b)
+def mul(a,b):
 	return a*b
 
-def div(a,b)
+def div(a,b):
 	return a/b
 
