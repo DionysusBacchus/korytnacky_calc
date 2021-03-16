@@ -6,12 +6,12 @@ Ubuntu 64bit
 Autori
 ------
 
-Nazev tymu 
+Korytnacky
 =======
 - xkhrys00 Dziyana Khrystsiuk
 - xlebed12 Polina Lebedeva 
 - xsikul15 Jakub Sikula 
-- xlogin04 jmeno prijmeni 
+- xpavel39 Martin Pavella
 
 Licence
 -------
