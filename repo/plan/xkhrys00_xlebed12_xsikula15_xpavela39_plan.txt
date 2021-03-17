@@ -1,8 +1,6 @@
-Terminy:16.03.2021-Stretnutie a zakladanie GIT repozitára,
-		   vytvorenie základného plánu a rozdelenie práce  
+Terminy:16.03.2021-Stretnutie a zakladanie GIT repozitára, vytvorenie základného plánu a rozdelenie práce  
 	18.03.2021-Odovzdanie plánov
-	19.03.2021-Ukončenie výuky, organizačné stretnutie, 
-		   začiatok práce na programovom vypracovaní
+	19.03.2021-Ukončenie výuky, organizačné stretnutie, začiatok práce na programovom vypracovaní
 	23.03.2021-Kontrola výsledkov
 	26.03.2021-Organizačné stretnutie
 	30.03.2021-Kontrola výsledkov
@@ -15,17 +13,20 @@ Terminy:16.03.2021-Stretnutie a zakladanie GIT repozitára,
 	23.04.2021-Organizačné stretnutie
 	27.04.2021-Kontrola výsledkov
 	30.04.2021-Do 7:00 odovzdať projekt
-	
+---------------------------------------------
 
 Ukoly:
 xkhrys00 - Testy,Debugging,Dokumentuj!
 xlebed12 - Inštalačný/odinštalačný balík,Užívatelská príručka,Dokumentuj!
 xsikul15 - Matematika,Profiling,Dokumentuj!
 xpavel39 - Tvorba GUI,Dokumentuj!
+----------------------------------------------
 
 Komunikacni kanaly a pravidla pro komunikace:
 Discord	-Aspoň raz denne skontrolovať nové správy, navštevovať dohodnuté stretnutia
 Email	-Kritická komunikácia emailom
+
+----------------------------------------------
 System pro spravu verzi a hosting:
 Github.com:	https://github.com/DionysusBacchus/korytnacky_calc
 
