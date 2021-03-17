@@ -18,10 +18,10 @@ Terminy:16.03.2021-Stretnutie a zakladanie GIT repozitára,
 	
 
 Ukoly:
-xkhrys00 - Testy,Dokumentuj!
+xkhrys00 - Testy,Debugging,Dokumentuj!
 xlebed12 - Inštalačný/odinštalačný balík,Užívatelská príručka,Dokumentuj!
-xsikul15 - Matematika,Debugging,Dokumentuj!
-xpavel39 - Tvorba GUI,Profiling,Dokumentuj!
+xsikul15 - Matematika,Profiling,Dokumentuj!
+xpavel39 - Tvorba GUI,Dokumentuj!
 
 Komunikacni kanaly a pravidla pro komunikace:
 Discord	-Aspoň raz denne skontrolovať nové správy, navštevovať dohodnuté stretnutia
