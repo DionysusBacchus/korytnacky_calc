@@ -1,18 +1,19 @@
-Terminy:16.03.2021-Stretnutie a zakladanie GIT repozitára, vytvorenie základného plánu a rozdelenie práce  
-	18.03.2021-Odovzdanie plánov
-	19.03.2021-Ukončenie výuky, organizačné stretnutie, začiatok práce na programovom vypracovaní
-	23.03.2021-Kontrola výsledkov
-	26.03.2021-Organizačné stretnutie
-	30.03.2021-Kontrola výsledkov
-	02.04.2021-Organizačné stretnutie
-	06.04.2021-Kontrola výsledkov
-	09.04.2021-Organizačné stretnutie
-	13.04.2021-Kontrola výsledkov
-	16.04.2021-Organizačné stretnutie
-	20.04.2021-Kontrola výsledkov
-	23.04.2021-Organizačné stretnutie
-	27.04.2021-Kontrola výsledkov
-	30.04.2021-Do 7:00 odovzdať projekt
+Terminy:
+		16.03.2021-Stretnutie a zakladanie GIT repozitára, vytvorenie základného plánu a rozdelenie práce  
+		18.03.2021-Odovzdanie plánov
+		19.03.2021-Ukončenie výuky, organizačné stretnutie, začiatok práce na programovom vypracovaní
+		23.03.2021-Kontrola výsledkov
+		26.03.2021-Organizačné stretnutie
+		30.03.2021-Kontrola výsledkov
+		02.04.2021-Organizačné stretnutie
+		06.04.2021-Kontrola výsledkov
+		09.04.2021-Organizačné stretnutie
+		13.04.2021-Kontrola výsledkov
+		16.04.2021-Organizačné stretnutie
+		20.04.2021-Kontrola výsledkov
+		23.04.2021-Organizačné stretnutie
+		27.04.2021-Kontrola výsledkov
+		30.04.2021-Do 7:00 odovzdať projekt
 ---------------------------------------------
 
 Ukoly:
