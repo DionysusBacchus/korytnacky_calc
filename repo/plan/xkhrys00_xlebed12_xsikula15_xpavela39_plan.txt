@@ -65,29 +65,38 @@ Terminy:
 ---------------------------------------------
 
 Ukoly:
-xkhrys00 - Dziyana Khrystsiuk
-	-Zodpovedná vedúca
+xkhrys00 - Dziyana Khrystsiuk - Vedúca Týmu
 	-Vytvorenie Testov a testových dát
 	-Debugging
+	-Celková kontrola dokumentácie
+	-Kontrola a preklad príručky a Nápovedy 
 xlebed12 - Polina Lebedeva 
 	-Inštalačný/odinštalačný balík
 	-Užívatelská príručka
 	-Nápoveda
-xsikul15 - Jakub Sikula
+	-Kontrola Testov
+xsikul15 - Jakub Sikula	- CoVedúci týmu
 	-Vytvorenie matematickej knižnice
 	-Tvorba Makefile
 	-Vytvorenie programu profiling
+	-Kontrola ovládania a GUI
 xpavel39 - Martin Pavella
 	-Vytvorenie kompletného GUI
+	-Vytvorenie ovládania
 	-Udržiavanie kompatibity
+	-Kontrola programových riešení
 	-Tvorba Makefile
 ----------------------------------------------
 
 Komunikacni kanaly a pravidla pro komunikace:
-Discord	-Aspoň raz denne skontrolovať nové správy, navštevovať dohodnuté stretnutia
-Email	-Kritická komunikácia emailom
+Discord	
+	-Slúži na diaľkové stretnutia cez skupinový hovor, bežnú komunikáciu s týmom a riešenie problémov týkajúcich sa projektu 
+	-Pravidlá: Aspoň raz denne skontrolovať nové správy, účastniť sa dohodnutých stretnutí, komunikácia v kanáli IVS výlučne týkajuca sa projektu
+Email
+	-Kritická komunikácia emailom, napríklad v prípade ak nieje člen týmu k zastihnutiu
 
 ----------------------------------------------
 System pro spravu verzi a hosting:
-Github.com:	https://github.com/DionysusBacchus/korytnacky_calc
+Github.com:	
+	https://github.com/DionysusBacchus/korytnacky_calc
 
