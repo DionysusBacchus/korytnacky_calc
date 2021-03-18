@@ -1,26 +1,86 @@
+IVS - Projekt 2 - Týmová spolupraca - korytnačia kalkulačka
+
+xkhrys00 Dziyana Khrystsiuk
+xlebed12 Polina Lebedeva 
+xsikul15 Jakub Sikula 
+xpavel39 Martin Pavella
+
+-----------------------------------------
 Terminy:
-		16.03.2021-Stretnutie a zakladanie GIT repozitára, vytvorenie základného plánu a rozdelenie práce  
-		18.03.2021-Odovzdanie plánov
-		19.03.2021-Ukončenie výuky, organizačné stretnutie, začiatok práce na programovom vypracovaní
-		23.03.2021-Kontrola výsledkov
-		26.03.2021-Organizačné stretnutie
-		30.03.2021-Kontrola výsledkov
-		02.04.2021-Organizačné stretnutie
-		06.04.2021-Kontrola výsledkov
-		09.04.2021-Organizačné stretnutie
-		13.04.2021-Kontrola výsledkov
-		16.04.2021-Organizačné stretnutie
-		20.04.2021-Kontrola výsledkov
-		23.04.2021-Organizačné stretnutie
-		27.04.2021-Kontrola výsledkov
-		30.04.2021-Do 7:00 odovzdať projekt
+	16.03.2021	
+		-Stretnutie a zakladanie GIT repozitára, vytvorenie základného plánu a rozdelenie práce  
+	18.03.2021	
+		-Odovzdanie plánov
+	19.03.2021	
+		-Ukončenie výuky, Organizačné stretnutie,
+		-Plánovanie a návrh testových dát, špecifikácia riešenia.
+	23.03.2021
+		-Kontrola výsledkov" plánu, testových dát, riešenia
+		-Upravenie plánu
+	26.03.2021	
+		-Organizačné stretnutie
+		-Začiatok práce na programovom riešení matematických funkcii, Testov, základnom Makefile  
+	30.03.2021	
+		-Kontrola priebežných výsledkov
+		-Upravenie plánu
+	02.04.2021
+		-Organizačné stretnutie
+		-Pokračovanie práce na zadaných úlohách, začiatok práce na GUI
+		-Diskusia o postrehoch a možných vylepšeniach už implemetovaných části
+	06.04.2021
+		-Kontrola výsledkov: testov, matematickej knižnice, makefile,
+		-Upravenie plánu
+	09.04.2021
+		-Organizačné stretnutie
+		-Začiatok práce na ovladání, Profilingu
+	13.04.2021
+		-Kontrola priebežných výsledkov
+		-Upravenie plánu
+	16.04.2021
+		-Organizačné stretnutie
+		-Začiatok práce na dodatočných funkciách, nápovede, manuále, (od)inštalátore
+	20.04.2021
+		-Kontrola priebežných výsledkov a výsledkov ovládania a profilingu
+		-Upravenie plánu
+	23.04.2021
+		-Organizačné stretnutie
+		-Kontrola výsledkov dodatočných funkcii, napovedy, manuálu, (od)inštalátoru, GUI
+	27.04.2021
+		-Organizačné stretnutie
+		-Kontrola finálneho produktu
+	30.04.2021	
+		-Do 7:00 odovzdať projekt
+		-Spísať problémy a postrehy, ktoré nastali počas projektu
+		-od 20:00 Vedúci prihlasi tým na inštalacie (predbežný dátum:12.05.)
+	04.05.2021	
+		-Organizačné stretnutie
+		-Plán obhajoby	
+	07.05.2021	
+		-Od tohto dátumu sú obhajoby
+	09.05.2021	
+		-Organizačné stretnutie
+		-Plán a finálna kontrola inštalacie
+	12.05.2021	
+		-Inštalacie 
 ---------------------------------------------
 
 Ukoly:
-xkhrys00 - Testy,Debugging,Dokumentuj!
-xlebed12 - Inštalačný/odinštalačný balík,Užívatelská príručka,Dokumentuj!
-xsikul15 - Matematika,Profiling,Dokumentuj!
-xpavel39 - Tvorba GUI,Dokumentuj!
+xkhrys00 - Dziyana Khrystsiuk
+	-Zodpovedná vedúca
+	-Vytvorenie Testov a testových dát
+	-Debugging
+xlebed12 - Polina Lebedeva 
+	-Inštalačný/odinštalačný balík
+	-Užívatelská príručka
+	-Nápoveda
+xsikul15 - Jakub Sikula
+	-Vytvorenie matematickej knižnice
+	-Tvorba Makefile
+	-Vytvorenie programu profiling
+xpavel39 - Martin Pavella
+	-Vytvorenie kompletného GUI
+	-Udržiavanie kompatibity
+	-Tvorba Makefile
 ----------------------------------------------
 
 Komunikacni kanaly a pravidla pro komunikace:
