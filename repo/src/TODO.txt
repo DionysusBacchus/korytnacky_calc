@@ -5,10 +5,33 @@ MATH FUNCTIONS: add
                 modulo
                 factorial
                 pow
-                root-returns 
-                ans -returns last answer
+                Ans -returns last answer
+                nroot(x,n) - returns n root of x
+                nroot(x)   - retruns square root of x  
 
-Math constant:  e
-                pi
+Math constant:  e   - 2.718281828459045
+                pi  - 3.141592653589793
 
-Evaluate: ***Closures*** - calls math functions and evaluate string. Retruns answer      
+Decimal precision - 8 digits
+
+submit  - at the end calls set_display_output(string)  
+        - Error handling: "SyntaxError"/"MathError"
+
+evaluate- calls math functions and evaluate string. Retruns answer
+
+Inerface:   e
+            Π
+            Ans
+            +
+            -
+            *
+            /
+            ^
+            √(x,n)
+            (                
+            )
+            !
+            = - submit(string) return none
+            .
+
+Error handling: In case user is an idiot .... F*** YOU :) 
