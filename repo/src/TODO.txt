@@ -1,0 +1,14 @@
+MATH FUNCTIONS: add
+                sub
+                div
+                mul
+                modulo
+                factorial
+                pow
+                root-returns 
+                ans -returns last answer
+
+Math constant:  e
+                pi
+
+Evaluate: ***Closures*** - calls math functions and evaluate string. Retruns answer      
