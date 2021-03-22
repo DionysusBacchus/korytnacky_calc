@@ -43,47 +43,83 @@ class TestAdd(unittest.TestCase):
 class TestSub(unittest.TestCase):
     #integer inputs
     def test_ints_pos(self):
-        self.assertEqual(mathlib.add(5,1),4)
-        self.assertEqual(mathlib.add(1,5),-4)
-        self.assertEqual(mathlib.add(6,6),0)
-        self.assertEqual(mathlib.add(0,55687),-55687)
-        self.assertEqual(mathlib.add(167,0),167)
+        self.assertEqual(mathlib.sub(5,1),4)
+        self.assertEqual(mathlib.sub(1,5),-4)
+        self.assertEqual(mathlib.sub(6,6),0)
+        self.assertEqual(mathlib.sub(0,55687),-55687)
+        self.assertEqual(mathlib.sub(167,0),167)
     def test_ints_neg(self):
-        self.assertEqual(mathlib.add(-2,-7),5)
-        self.assertEqual(mathlib.add(-7,-2),-5)
-        self.assertEqual(mathlib.add(-4,-4),0)
-        self.assertEqual(mathlib.add(0,-18),18)
-        self.assertEqual(mathlib.add(-42,0),-42)
+        self.assertEqual(mathlib.sub(-2,-7),5)
+        self.assertEqual(mathlib.sub(-7,-2),-5)
+        self.assertEqual(mathlib.sub(-4,-4),0)
+        self.assertEqual(mathlib.sub(0,-18),18)
+        self.assertEqual(mathlib.sub(-42,0),-42)
     def test_ints_mixed(self):
-        self.assertEqual(mathlib.add(-4,6),-10)
-        self.assertEqual(mathlib.add(7,-2),9)
-        self.assertEqual(mathlib.add(0,0),0))
-        self.assertEqual(mathlib.add(1,-179),-180)
-        self.assertEqual(mathlib.add(87,-3),90)
+        self.assertEqual(mathlib.sub(-4,6),-10)
+        self.assertEqual(mathlib.sub(7,-2),9)
+        self.assertEqual(mathlib.sub(0,0),0)
+        self.assertEqual(mathlib.sub(1,-179),-180)
+        self.assertEqual(mathlib.sub(87,-3),90)
     
     #double inputs
     def test_doubles_pos(self):
-        self.assertAlmostEqual(mathlib.add(0.1,0.1),0,9)
-        self.assertAlmostEqual(mathlib.add(0.00000001,0.1),-0.09999999,9)
-        self.assertAlmostEqual(mathlib.add(1.234,0.234),1,9)
-        self.assertAlmostEqual(mathlib.add(0.234,1.234),-1,9)
+        self.assertAlmostEqual(mathlib.sub(0.1,0.1),0,9)
+        self.assertAlmostEqual(mathlib.sub(0.00000001,0.1),-0.09999999,9)
+        self.assertAlmostEqual(mathlib.sub(1.234,0.234),1,9)
+        self.assertAlmostEqual(mathlib.sub(0.234,1.234),-1,9)
     def test_doubles_neg(self):
-        self.assertAlmostEqual(mathlib.add(-0.1,-0.1),0,9)
-        self.assertAlmostEqual(mathlib.add(-40.1,-3.21),-36.89,9)
-        self.assertAlmostEqual(mathlib.add(-80.77,-0.77),-80,9)
-        self.assertAlmostEqual(mathlib.add(-0.77000001,-80.77000001),80,9)
+        self.assertAlmostEqual(mathlib.sub(-0.1,-0.1),0,9)
+        self.assertAlmostEqual(mathlib.sub(-40.1,-3.21),-36.89,9)
+        self.assertAlmostEqual(mathlib.sub(-80.77,-0.77),-80,9)
+        self.assertAlmostEqual(mathlib.sub(-0.77000001,-80.77000001),80,9)
     def test_doubles_mixed(self):
-        self.assertAlmostEqual(mathlib.add(0.1,-0.1),0.2,9)
-        self.assertAlmostEqual(mathlib.add(-0.0001,0.00000001),-0.00010001,9)
-        self.assertAlmostEqual(mathlib.add(449.5,0.001),449.499,9)
-        self.assertAlmostEqual(mathlib.add(-120.876,0.876),-120,9)
+        self.assertAlmostEqual(mathlib.sub(0.1,-0.1),0.2,9)
+        self.assertAlmostEqual(mathlib.sub(-0.0001,0.00000001),-0.00010001,9)
+        self.assertAlmostEqual(mathlib.sub(449.5,0.001),449.499,9)
+        self.assertAlmostEqual(mathlib.sub(-120.876,0.876),-120,9)
 
 class TestDiv(unittest.TestCase):
     pass
 
 class TestMul(unittest.TestCase):
-    pass
+    #integer inputs
+    def test_ints_pos(self):
+        self.assertEqual(mathlib.mul(1,9),9)
+        self.assertEqual(mathlib.mul(7,1),7)
+        self.assertEqual(mathlib.mul(567,0),0)
+        self.assertEqual(mathlib.mul(0,985),0)
+        self.assertEqual(mathlib.mul(5,9),45)
+        self.assertEqual(mathlib.mul(20,80),1600)
+    def test_ints_neg(self):
+        self.assertEqual(mathlib.mul(-1,-5),5)
+        self.assertEqual(mathlib.mul(-16,-1),16)
+        self.assertEqual(mathlib.mul(-8,0),0)
+        self.assertEqual(mathlib.mul(0,-198765),0)
+        self.assertEqual(mathlib.mul(-6,-8),48)
+        self.assertEqual(mathlib.mul(-500,-20),10000)
+    def test_ints_mixed(self):
+        self.assertEqual(mathlib.mul(0,0),0)
+        self.assertEqual(mathlib.mul(1,-1),-1)
+        self.assertEqual(mathlib.mul(-12,10),-120)
+        self.assertEqual(mathlib.mul(-1,30),-30)
+        self.assertEqual(mathlib.mul(5,-6),-30)
 
+    #double inputs
+    def test_doubles_pos(self):
+        self.assertAlmostEqual(mathlib.mul(0.1,0.1),0.01,9)
+        self.assertAlmostEqual(mathlib.mul(0.0029,0.0001),0.00000029,9)
+        self.assertAlmostEqual(mathlib.mul(1.6,0.1),0.16,9)
+        self.assertAlmostEqual(mathlib.mul(1.6,1.6),2.56,9)
+    def test_doubles_neg(self):
+        self.assertAlmostEqual(mathlib.mul(-0.1,-0.1),0.01,9)
+        self.assertAlmostEqual(mathlib.mul(-0.0029,-0.0001),0.00000029,9)
+        self.assertAlmostEqual(mathlib.mul(-1.6,-0.1),0.16,9)
+        self.assertAlmostEqual(mathlib.mul(-1.6,-1.6),2.56,9)
+    def test_doubles_mixed(self):
+        self.assertAlmostEqual(mathlib.mul(0.1,-0.1),-0.01,9)
+        self.assertAlmostEqual(mathlib.mul(-0.0029,0.0001),-0.00000029,9)
+        self.assertAlmostEqual(mathlib.mul(1.6,-0.1),-0.16,9)
+        self.assertAlmostEqual(mathlib.mul(-1.6,1.6),-2.56,9)
 class TestModulo(unittest.TestCase):
     pass
 
