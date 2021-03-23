@@ -5,9 +5,13 @@ MATH FUNCTIONS: add
                 modulo
                 factorial
                 pow
-                Ans -returns last answer
                 nroot(x,n) - returns n root of x
-                nroot(x)   - retruns square root of x  
+                nroot(x)   - retruns square root of x 
+                 
+                #proc vlastne s velkou A?
+                #ulozi se vzdy po submitu, a ans to pouze POPne? 
+                Ans -returns last answer
+                
 
 Math constant:  e   - 2.718281828459045
                 pi  - 3.141592653589793
