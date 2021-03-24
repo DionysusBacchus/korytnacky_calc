@@ -7,10 +7,8 @@ MATH FUNCTIONS: add
                 pow
                 nroot(x,n) - returns n root of x
                 nroot(x)   - retruns square root of x 
-                 
-                #proc vlastne s velkou A?
-                #ulozi se vzdy po submitu, a ans to pouze POPne? 
-                Ans -returns last answer
+                
+                ans -returns last answer
                 
 
 Math constant:  e   - 2.718281828459045
@@ -30,12 +28,15 @@ Inerface:   e
             -
             *
             /
+            %
             ^
             √(x,n)
             (                
             )
             !
-            = - submit(string) return none
+            = - submit(string) returns error or ans
             .
+            <- (backspace)
+            clear all
 
 Error handling: In case user is an idiot .... F*** YOU :) 

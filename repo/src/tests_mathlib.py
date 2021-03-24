@@ -6,7 +6,6 @@ import mathlib
 
 #Tests for the add (+) function 
 class TestAdd(unittest.TestCase):
-
     #integer inputs
     def test_ints_pos(self):
         self.assertEqual(mathlib.add(4,5),9)
@@ -122,23 +121,6 @@ class TestMul(unittest.TestCase):
         self.assertAlmostEqual(mathlib.mul(1.6,-0.1),-0.16,9)
         self.assertAlmostEqual(mathlib.mul(-1.6,1.6),-2.56,9)
 
-    #double inputs
-    def test_doubles_pos(self):
-        self.assertAlmostEqual(mathlib.mul(0.1,0.1),0.01,9)
-        self.assertAlmostEqual(mathlib.mul(0.0029,0.0001),0.00000029,9)
-        self.assertAlmostEqual(mathlib.mul(1.6,0.1),0.16,9)
-        self.assertAlmostEqual(mathlib.mul(1.6,1.6),2.56,9)
-    def test_doubles_neg(self):
-        self.assertAlmostEqual(mathlib.mul(-0.1,-0.1),0.01,9)
-        self.assertAlmostEqual(mathlib.mul(-0.0029,-0.0001),0.00000029,9)
-        self.assertAlmostEqual(mathlib.mul(-1.6,-0.1),0.16,9)
-        self.assertAlmostEqual(mathlib.mul(-1.6,-1.6),2.56,9)
-    def test_doubles_mixed(self):
-        self.assertAlmostEqual(mathlib.mul(0.1,-0.1),-0.01,9)
-        self.assertAlmostEqual(mathlib.mul(-0.0029,0.0001),-0.00000029,9)
-        self.assertAlmostEqual(mathlib.mul(1.6,-0.1),-0.16,9)
-        self.assertAlmostEqual(mathlib.mul(-1.6,1.6),-2.56,9)
-
 #Tests for the modulo (|x|) function
 class TestModulo(unittest.TestCase):
     #integer inputs
@@ -146,6 +128,8 @@ class TestModulo(unittest.TestCase):
         self.assertEqual(mathlib.modulo(0),0)
         self.assertEqual(mathlib.modulo(-8),8)
         self.assertEqual(mathlib.modulo(55),55)
+
+    #double inputs
     def test_doubles(self):
         self.assertAlmostEqual(mathlib.modulo(1.6),1.6)
         self.assertAlmostEqual(mathlib.modulo(-0.00000001),0.00000001)
