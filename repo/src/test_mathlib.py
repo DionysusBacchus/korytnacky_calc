@@ -26,7 +26,30 @@ class TestFactorial(unittest.TestCase):
         res = mathlib.submit('0!')
         self.assertEqual(res,1)
 
-#actually we dont need to implement modulo...
+#Noncompulsory absotule (|x|) function
+class TestAbsolute(unittest.TestCase):
+    
+    def test_ints(self):
+        self.assertEqual(mathlib.absolute(0),0)
+        self.assertEqual(mathlib.absolute(-8),8)
+        self.assertEqual(mathlib.absolute(55),55)
+
+    def test_doubles(self):
+        self.assertAlmostEqual(mathlib.absolute(1.6),1.6,8)
+        self.assertAlmostEqual(mathlib.absolute(-0.00000001),0.00000001,8)
+        self.assertAlmostEqual(mathlib.absolute(-56.9),56.9,8)
+    
+    def test_through_submit(self):
+        res = mathlib.submit('|-4|')
+        self.assertEqual(res,4)
+        res = mathlib.submit('|18|')
+        self.assertEqual(res,18)
+        res = mathlib.submit('|-0.00016574|')
+        self.assertAlmostEqual(res,0.00016574,8)
+        res = mathlib.submit('|0.74|')
+        self.assertAlmostEqual(res,0.74,8)
+
+#Noncompulsory modulo (%) function
 class TestModulo(unittest.TestCase):
 
     def test_forbidden(self):
@@ -141,6 +164,10 @@ class TestSubmitComplex(unittest.TestCase):
             mathlib.submit('(4+5)*2)')
         with self.assertRaises(SyntaxError):
             mathlib.submit('((4+5)*2')
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('|4+5)*2)')
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('|(4+5)|*2|')
     
     def test_basics_int(self):
         res = mathlib.submit('(4+5)*2')
@@ -193,6 +220,7 @@ class TestSubmitComplex(unittest.TestCase):
             mathlib.submit('√(10-28,6)')
 
 
-
+if __name__ == '__main__':
+    unittest.main()
 
 
