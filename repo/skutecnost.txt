@@ -1,2 +1,5 @@
 19.03.2021 neuskutočnilo sa stretnutie z technických problémov (výpadeok internetu a elektriny) preložene na 20.03
+
 20.03. Stretnutie sa neuskutočnilo z důvodu nepritomnosti člena (cesta domov z brna) preložene na 21.03 (To už sa nám podarilo :) )
+
+26.03 Bylo zjištěno, že je potřeba mít nějaký extra-nouzový kanal pro komunikaci, pokud člen týmu není přitomen na Discordu, ani neodepisuje na maily. Bylo rozhodnuto přídat do komunikačních kanalu volání přes mobil, aby byla možnost se do někoho dovolat jen v extremních případech.
