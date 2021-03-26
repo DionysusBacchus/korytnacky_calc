@@ -30,7 +30,7 @@ class TestFactorial(unittest.TestCase):
 class TestModulo(unittest.TestCase):
 
     def test_forbidden(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ZeroDivisionError):
             mathlib.modulo(8,0)
 
     def test_pos(self):
@@ -77,12 +77,12 @@ class TestNRoot(unittest.TestCase):
 
     def test_unit(self):
         self.assertEqual(mathlib.nroot(4,2),2)
-        self.assertEqual(mathlib.nroot(8,3),2)
+        self.assertEqual(mathlib.nroot(-8,3),-2)
         self.assertAlmostEqual(mathlib.nroot(0.22667121,4),0.69,8)
 
     def test_through_submit(self):
-        res=mathlib.submit('√(8,3)')
-        self.assertEqual(res,2)
+        res=mathlib.submit('√(-8,3)')
+        self.assertEqual(res,-2)
         res = mathlib.submit('√(0.0065536,4)')
         self.assertAlmostEqual(res,0.16,8)
 
@@ -124,8 +124,73 @@ class TestPow(unittest.TestCase):
         self.assertAlmostEqual(res,15.625,8)
         res = mathlib.submit('(-2)^3')
         self.assertEqual(res,-8)
+        res = mathlib.submit('(-2)^2')
+        self.assertEqual(res,4)
         res = mathlib.submit('(4)^2')
         self.assertEqual(res,16)
+
+class TestSubmitComplex(unittest.TestCase):
+
+    #Each bracket has to have a complementary one
+    def test_brackets(self):
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('(4+5*2')
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('4+5)*2')
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('(4+5)*2)')
+        with self.assertRaises(SyntaxError):
+            mathlib.submit('((4+5)*2')
+    
+    def test_basics_int(self):
+        res = mathlib.submit('(4+5)*2')
+        self.assertEqual(res,18)
+        res = mathlib.submit('-8+12/2')
+        self.assertEqual(res,-2)
+        res = mathlib.submit('8/-4+2')
+        self.assertEqual(res,0)
+        res = mathlib.submit('8/(-4+2)')
+        self.assertEqual(res,-4)
+        res = mathlib.submit('-1*5-15')
+        self.assertEqual(res,-20)
+    
+    def test_pro_int(self):
+        res = mathlib.submit('2!+5*√(-8,3)')
+        self.assertEqual(res,-14)
+        res = mathlib.submit('(-4)^2/1!')
+        self.assertEqual(res,16)
+    
+    def test_basics_double(self):
+        res = mathlib.submit('(4.091+0.009)*1.5')
+        self.assertAlmostEqual(res,7.5,8)
+        res = mathlib.submit('14.2/2-7.1')
+        self.assertAlmostEqual(res,0,8)
+        res = mathlib.submit('-8.16*4/3+9')
+        self.assertAlmostEqual(res,-1.88,8)
+        res = mathlib.submit('-8.16+4/(3+1)')
+        self.assertAlmostEqual(res,-7.16,8)
+
+    def test_pro_double(self):
+        res = mathlib.submit('(4.091+0.009)^2-1.5*4')
+        self.assertAlmostEqual(res,19,8)
+        res = mathlib.submit('(4.091+0.009)^2-√(1.44)*5+0.12345678')
+        self.assertAlmostEqual(res,20.12345678,8)
+
+    def test_forbidden(self):
+        with self.assertRaises(ZeroDivisionError):
+            mathlib.submit('12/0')
+        with self.assertRaises(ZeroDivisionError):
+            mathlib.submit('1.15/0')
+        with self.assertRaises(ValueError):
+            mathlib.submit('(14-28)!')
+        with self.assertRaises(ValueError):
+            mathlib.submit('(0.18724)!')
+        with self.assertRaises(ValueError):
+            mathlib.submit('√(10-28)')
+        with self.assertRaises(ValueError):
+            mathlib.submit('√(0.5-28)')
+        with self.assertRaises(ValueError):
+            mathlib.submit('√(10-28,6)')
 
 
 
