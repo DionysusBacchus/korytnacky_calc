@@ -96,10 +96,10 @@ Email
 	-Kritická komunikácia emailom, napríklad v prípade ak nieje člen týmu k zastihnutiu
 Mobil
 	-Extra-kritická komunikace přes mobil, pokud člen není přítomen ani na Discordu, ani mailem
-	xkhrys00 Dziyana Khrystsiuk +420 731 515 605
-	xlebed12 Polina Lebedeva +420 773 539 735
-	xsikul15 Jakub Sikula 
-	xpavel39 Martin Pavella +421 944 116 332
+	xkhrys00 Dziyana Khrystsiuk		+420 731 515 605
+	xlebed12 Polina Lebedeva		+420 773 539 735
+	xsikul15 Jakub Sikula			+421 948 254 823
+	xpavel39 Martin Pavella			+421 944 116 332
 	
 
 ----------------------------------------------
