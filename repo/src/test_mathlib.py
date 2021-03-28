@@ -92,11 +92,14 @@ class TestSquareRoot(unittest.TestCase):
         self.assertAlmostEqual(res,0.0042,8)
 
 class TestNRoot(unittest.TestCase):
+
     def test_forbidden(self):
         with self.assertRaises(ValueError):
             mathlib.nroot(-4,4)
         with self.assertRaises(ValueError):
             mathlib.nroot(4,0)
+        with self.assertRaises(ValueError):
+            mathlib.nroot(4,0.4)
 
     def test_unit(self):
         self.assertEqual(mathlib.nroot(4,2),2)
@@ -110,6 +113,8 @@ class TestNRoot(unittest.TestCase):
         self.assertAlmostEqual(res,0.16,8)
 
 class TestPow(unittest.TestCase):
+
+    #Assigment defined natural exponents
     def test_forbidden(self):
         with self.assertRaises(ValueError):
             mathlib.pow(1,-1)
@@ -218,6 +223,10 @@ class TestSubmitComplex(unittest.TestCase):
             mathlib.submit('√(0.5-28)')
         with self.assertRaises(ValueError):
             mathlib.submit('√(10-28,6)')
+        with self.assertRaises(ValueError):
+            mathlib.submit('(10-28,6)^-4')
+        with self.assertRaises(ValueError):
+            mathlib.submit('(10-28,6)^0.5')
 
 
 if __name__ == '__main__':
