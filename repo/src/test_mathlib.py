@@ -35,7 +35,7 @@ class TestAbsolute(unittest.TestCase):
         self.assertEqual(mathlib.absolute(55),55)
 
     def test_doubles(self):
-        self.assertAlmostEqual(mathlib.absolute(1.6),1.6,8)
+        self.assertAlmostEqual(mathlib.absolute(1.6),1.6,8) #? Proc tady 2 hodnoty s carkou? 
         self.assertAlmostEqual(mathlib.absolute(-0.00000001),0.00000001,8)
         self.assertAlmostEqual(mathlib.absolute(-56.9),56.9,8)
     
