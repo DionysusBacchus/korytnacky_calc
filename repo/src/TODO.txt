@@ -23,7 +23,7 @@ submit  - at the end calls set_display_output(string), returns ans or err
 evaluate- calls math functions and evaluate string. Retruns answer
 
 Inerface:   e
-            Π
+            π
             Ans
             +
             -
