@@ -9,22 +9,58 @@ import tkinter as tk
 # 	@biref Class that creates a window with all UI elements for a calculator.
 #	Window is displayed when the 'start_loop()' function is called.
 class UI():
-	# 	Root window
+	## 	Root window
 	root = None
 
-	#	StringVar variable holding the displayed expression
+	##	StringVar variable holding the displayed expression
 	expr = None
 
-	#	StringVar variable holding the displayed hint
+	##	StringVar variable holding the displayed hint
 	hint = None
 
-	# 	External function called after submit button is pressed.
+	## 	External function called after submit button is pressed.
 	#	Takes 1 argument representing the expression. Needs to be set using 'set_submit_callback()'.
 	submit_callback = None
 
+	##	Dictionary mapping key symbols to functions. Used in 'key_pressed()'
+	key_handler = None
+
+	##	Constructor only initializes global variables. To create the window use 'start_loop()'.
 	def __init__(self):
 		global submit_callback
 		submit_callback = None
+
+		global key_handler
+		key_handler = {
+			"0": self.b_0,
+			"1": self.b_1,
+			"2": self.b_2,
+			"3": self.b_3,
+			"4": self.b_4,
+			"5": self.b_5,
+			"6": self.b_6,
+			"7": self.b_7,
+			"8": self.b_8,
+			"9": self.b_9,
+			"e": self.b_e,
+			"comma": self.b_sepp,
+			"period": self.b_dot,
+			"a": self.b_ans,
+			"A": self.b_ans,
+			"parenleft": self.b_left_br,
+			"parenright": self.b_right_br,
+			"x": self.b_times,
+			"slash": self.b_div,
+			"plus": self.b_plus,
+			"minus": self.b_minus,
+			"exclam": self.b_fact,
+			"bar": self.b_abs,
+			"percent": self.b_mod,
+			"asciicircum": self.b_pow,
+			"BackSpace": self.b_back,
+			"Delete": self.b_ac,
+			"Return": self.submit_expr
+		}
 
 	##	Function called when the submit button is pressed.
 	#	Calls the 'submit_callback()' function with the currently displayed expression.
@@ -77,11 +113,11 @@ class UI():
 		font = ("Ubuntu",16)
 
 		self.create_number_buttons(root,font=font,bg=num_but_color)
-		self.create_button(root,".",7,1,font=font,command=self.b_dot,hint_text="Desetinná tečka:     2.5",bg=color_A)
-		self.create_button(root, "Ans", 7, 2,font=font,command=self.b_ans,hint_text="Poslední výsledek:     Ans*2",bg=color_A)
+		self.create_button(root,".",7,1,font=font,command=self.b_dot,hint_text="Desetinná tečka:     2.5",			bg=color_A)
+		self.create_button(root, "Ans", 7, 2,font=font,command=self.b_ans,hint_text="Poslední výsledek:     Ans*2",	bg=color_A)
 
-		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793",	bg=color_B)
-		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045",	bg=color_B)
+		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793",			bg=color_B)
+		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045",bg=color_B)
 		self.create_button(root, ",", 3, 2,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)",	bg=color_B)
 
 		self.create_button(root,"(",4,3,font=font,command=self.b_left_br, 	bg=color_B)
@@ -141,7 +177,6 @@ class UI():
 
 		self.create_buttons(root)
 
-
 	## 	Function starts the mainloop and displays the window.
 	#	Must be called after the UI object has been created.
 	#	Function loops until the window is closed.
@@ -149,9 +184,15 @@ class UI():
 		global root
 		root = tk.Tk()
 
+		root.bind("<KeyRelease>",self.key_pressed)
+
 		self.setup(root)
 
 		root.mainloop()
+
+	def key_pressed(self,evt):
+		if evt.keysym in key_handler:
+			key_handler[evt.keysym]()
 
 	##	Function sets the displayed hint.
 	#	@param new_hint New hint to be set.
@@ -260,7 +301,10 @@ class UI():
 
 	def b_back(self):
 		expr = self.get_expr()
-		expr = expr[0:-1]
+		if expr[-3:] == "Ans":
+			expr = expr[0:-3]
+		else:
+			expr = expr[0:-1]
 		self.set_expr(expr)
 
 	def b_ac(self):
