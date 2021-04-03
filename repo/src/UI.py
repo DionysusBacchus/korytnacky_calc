@@ -15,6 +15,9 @@ class UI():
 	#	StringVar variable holding the displayed expression
 	expr = None
 
+	#	StringVar variable holding the displayed hint
+	hint = None
+
 	# 	External function called after submit button is pressed.
 	#	Takes 1 argument representing the expression. Needs to be set using 'set_submit_callback()'.
 	submit_callback = None
@@ -38,12 +41,19 @@ class UI():
 	#	@param text Text of the button
 	#	@param row Row in which the button will be placed
 	#	@param col Column in which the button will be placed
-	def create_button(self,root,text,row,col,**extra):
+	#	@param hint_text Text to be displayed on the hint display when hovered over
+	#	@param extra Optional arguments passed to tk.Button() constructor
+	def create_button(self,root,text,row,col,hint_text="",**extra):
 		b = tk.Button(root,text=text,width=4,height=2,activebackground="#0096c7",relief=tk.RAISED,**extra)
 		b.grid(row=row,column=col)
 
+		if hint_text != "":
+			b.bind("<Enter>", lambda x: self.set_hint(hint_text))
+			b.bind("<Leave>", lambda x: self.clear_hint())
+
 	##	Function creates number buttons using 'create_button()'.
 	#	@param root Root window
+	#	@param extra Optional arguments passed to tk.Button() constructor
 	def create_number_buttons(self,root,**extra):
 		self.create_button(root, "0", 7, 0,**extra,command=self.b_0)
 		self.create_button(root, "1", 6, 0,**extra,command=self.b_1)
@@ -67,27 +77,28 @@ class UI():
 		font = ("Ubuntu",16)
 
 		self.create_number_buttons(root,font=font,bg=num_but_color)
-		self.create_button(root,".",7,1,font=font,command=self.b_dot,bg=color_A)
-		self.create_button(root, "Ans", 7, 2,font=font,command=self.b_ans,bg=color_A)
+		self.create_button(root,".",7,1,font=font,command=self.b_dot,hint_text="Desetinná tečka:     2.5",bg=color_A)
+		self.create_button(root, "Ans", 7, 2,font=font,command=self.b_ans,hint_text="Poslední výsledek:     Ans*2",bg=color_A)
 
-		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,bg=color_B)
-		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,bg=color_B)
+		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793",	bg=color_B)
+		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045",	bg=color_B)
+		self.create_button(root, ",", 3, 2,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)",	bg=color_B)
 
-		self.create_button(root,"(",4,3,font=font,command=self.b_left_br,bg=color_B)
-		self.create_button(root,")",4,4,font=font,command=self.b_right_br,bg=color_B)
-		self.create_button(root,"x",5,3,font=font,command=self.b_times,bg=color_A)
-		self.create_button(root,"/",5,4,font=font,command=self.b_div,bg=color_A)
-		self.create_button(root,"+",6,3,font=font,command=self.b_plus,bg=color_A)
-		self.create_button(root,"-",6,4,font=font,command=self.b_minus,bg=color_A)
-		self.create_button(root,"!",7,3,font=font,command=self.b_fact,bg=color_B)
-		self.create_button(root,"|",7,4,font=font,command=self.b_abs,bg=color_B)
+		self.create_button(root,"(",4,3,font=font,command=self.b_left_br, 	bg=color_B)
+		self.create_button(root,")",4,4,font=font,command=self.b_right_br,	bg=color_B)
+		self.create_button(root,"x",5,3,font=font,command=self.b_times,		bg=color_A)
+		self.create_button(root,"/",5,4,font=font,command=self.b_div,		bg=color_A)
+		self.create_button(root,"+",6,3,font=font,command=self.b_plus,		bg=color_A)
+		self.create_button(root,"-",6,4,font=font,command=self.b_minus,		bg=color_A)
+		self.create_button(root,"!",7,3,font=font,command=self.b_fact,hint_text="Faktoriál:     5!",			bg=color_B)
+		self.create_button(root,"|",7,4,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|",	bg=color_B)
 
-		self.create_button(root,"<-",4,5,font=font,command=self.b_back,bg=color_C)
-		self.create_button(root,"AC",4,6,font=font,command=self.b_ac,bg=color_C)
-		self.create_button(root,"%" ,5,5,font=font,command=self.b_mod,bg=color_B)
-		self.create_button(root,"^" ,5,6,font=font,command=self.b_pow,bg=color_B)
-		self.create_button(root,"√" ,6,5,font=font,command=self.b_sqrt,bg=color_B)
-		self.create_button(root,"n√",6,6,font=font,command=self.b_nroot,bg=color_B)
+		self.create_button(root,"<-",4,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
+		self.create_button(root,"AC",4,6,font=font,command=self.b_ac,hint_text="Smazat všechno",		bg=color_C)
+		self.create_button(root,"%" ,5,5,font=font,command=self.b_mod,hint_text="Modulo:     8%3",		bg=color_B)
+		self.create_button(root,"^" ,5,6,font=font,command=self.b_pow,hint_text="Umocnění:     2^e",	bg=color_B)
+		self.create_button(root,"√" ,6,5,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81",	bg=color_B)
+		self.create_button(root,"√(x,n)",6,6,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu √(x,n):     √(27,3)",bg=color_B)
 
 		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=color_A,relief=tk.RAISED,activebackground="#0096c7")
 		b_eq.grid(columnspan=2,row=7,column=5)
@@ -101,18 +112,32 @@ class UI():
 
 		# Color setup. Button colors are in 'create_buttons()'
 		root.configure(bg="#0f4c5c")
-		display_color = "#0f4c5c"	#	"#f0f3bd"
+		display_color = "#0f4c5c"
 		display_text_color = "#b7e4c7"
+		hint_color = "#028090"
+		hint_text_color = "#00a896"
 
+		# Hint properties
+		hint_font = ("Ubuntu", 18)
+		hint_width = 500
+
+		# Creating hint
+		global hint
+		hint = tk.StringVar()
+		hint_display = tk.Label(root,textvariable=hint,font=hint_font,bg=hint_color,fg=hint_text_color,width=36,wraplength=hint_width,anchor="w")
+		hint_display.grid(row=0,column=0,columnspan=7,pady=10,padx=10)
+
+
+		# Display properties
 		display_font = ("Ubuntu", 24)
-		display_width = 500
+		display_width = hint_width
+
+		# Creating display
 		global expr
 		expr = tk.StringVar()
-		expr.set("-14x(-2.5)+7")
-
 		display = tk.Label(root,textvariable=expr,font=display_font,bg=display_color,fg=display_text_color)
 		display.configure(wraplength=display_width)
-		display.grid(columnspan=8,rowspan=3,column=0,row=0,pady=40)
+		display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
 
 		self.create_buttons(root)
 
@@ -127,6 +152,17 @@ class UI():
 		self.setup(root)
 
 		root.mainloop()
+
+	##	Function sets the displayed hint.
+	#	@param new_hint New hint to be set.
+	def set_hint(self,new_hint):
+		global hint
+		hint.set(new_hint)
+
+	## 	Function sets the displayed hint to "".
+	def clear_hint(self):
+		global hint
+		hint.set("")
 
 	##	Function sets the displayed expression.
 	#	@param new_expr New expression to be set.
@@ -194,6 +230,9 @@ class UI():
 
 	def b_e(self):
 		self.append_expr("e")
+
+	def b_sepp(self):
+		self.append_expr(",")
 
 	def b_left_br(self):
 		self.append_expr("(")
