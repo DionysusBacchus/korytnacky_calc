@@ -90,18 +90,19 @@ class UI():
 
 	##	Function creates number buttons using 'create_button()'.
 	#	@param root Root window
+	#	@param l_col The left most column of the number buttons.
 	#	@param extra Optional arguments passed to tk.Button() constructor
-	def create_number_buttons(self,root,**extra):
-		self.create_button(root, "0", 7, 0,**extra,command=self.b_0)
-		self.create_button(root, "1", 6, 0,**extra,command=self.b_1)
-		self.create_button(root, "2", 6, 1,**extra,command=self.b_2)
-		self.create_button(root, "3", 6, 2,**extra,command=self.b_3)
-		self.create_button(root, "4", 5, 0,**extra,command=self.b_4)
-		self.create_button(root, "5", 5, 1,**extra,command=self.b_5)
-		self.create_button(root, "6", 5, 2,**extra,command=self.b_6)
-		self.create_button(root, "7", 4, 0,**extra,command=self.b_7)
-		self.create_button(root, "8", 4, 1,**extra,command=self.b_8)
-		self.create_button(root, "9", 4, 2,**extra,command=self.b_9)
+	def create_number_buttons(self,root,l_col,**extra):
+		self.create_button(root, "0", 7, l_col,**extra,command=self.b_0)
+		self.create_button(root, "1", 6, l_col,**extra,command=self.b_1)
+		self.create_button(root, "2", 6, l_col+1,**extra,command=self.b_2)
+		self.create_button(root, "3", 6, l_col+2,**extra,command=self.b_3)
+		self.create_button(root, "4", 5, l_col,**extra,command=self.b_4)
+		self.create_button(root, "5", 5, l_col+1,**extra,command=self.b_5)
+		self.create_button(root, "6", 5, l_col+2,**extra,command=self.b_6)
+		self.create_button(root, "7", 4, l_col,**extra,command=self.b_7)
+		self.create_button(root, "8", 4, l_col+1,**extra,command=self.b_8)
+		self.create_button(root, "9", 4, l_col+2,**extra,command=self.b_9)
 
 	##	Function creates all buttons on the root window
 	#	@param root Root window
@@ -113,31 +114,30 @@ class UI():
 
 		font = ("Ubuntu",16)
 
-		self.create_number_buttons(root,font=font,bg=num_but_color)
-		self.create_button(root,".",7,1,font=font,command=self.b_dot,hint_text="Desetinná tečka:     2.5",			bg=color_A)
-		self.create_button(root, "Ans", 7, 2,font=font,command=self.b_ans,hint_text="Poslední výsledek:     Ans*2",	bg=color_A)
+		self.create_number_buttons(root,2,font=font,bg=num_but_color)
+		self.create_button(root,".",7,3,font=font,command=self.b_dot,hint_text="Desetinná tečka:     2.5", bg=color_A)
+		self.create_button(root, "Ans", 7, 4,font=font,command=self.b_ans,hint_text="Poslední výsledek:     Ans*2", bg=color_A)
 
-		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793",			bg=color_B)
-		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045",bg=color_B)
-		self.create_button(root, ",", 3, 2,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)",	bg=color_B)
+		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793", bg=color_B)
+		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045", bg=color_B)
+		self.create_button(root, ",", 3, 2,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
 
-		self.create_button(root,"(",4,3,font=font,command=self.b_left_br, 	bg=color_B)
-		self.create_button(root,")",4,4,font=font,command=self.b_right_br,	bg=color_B)
-		self.create_button(root,"x",5,3,font=font,command=self.b_times,		bg=color_A)
-		self.create_button(root,"/",5,4,font=font,command=self.b_div,		bg=color_A)
-		self.create_button(root,"+",6,3,font=font,command=self.b_plus,		bg=color_A)
-		self.create_button(root,"-",6,4,font=font,command=self.b_minus,		bg=color_A)
-		self.create_button(root,"!",7,3,font=font,command=self.b_fact,hint_text="Faktoriál:     5!",			bg=color_B)
-		self.create_button(root,"|",7,4,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|",	bg=color_B)
+		self.create_button(root,"(",4,0,font=font,command=self.b_left_br, bg=color_A)
+		self.create_button(root,")",4,1,font=font,command=self.b_right_br, bg=color_A)
+		self.create_button(root,"%" ,5,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
+		self.create_button(root,"^" ,5,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_B)
+		self.create_button(root,"√" ,6,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_B)
+		self.create_button(root,"√(x,n)",6,1,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_B)
+		self.create_button(root,"!",7,0,font=font,command=self.b_fact,hint_text="Faktoriál:     5!", bg=color_B)
+		self.create_button(root,"|",7,1,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|", bg=color_B)
 
 		self.create_button(root,"<-",4,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
-		self.create_button(root,"AC",4,6,font=font,command=self.b_ac,hint_text="Smazat všechno",		bg=color_C)
-		self.create_button(root,"%" ,5,5,font=font,command=self.b_mod,hint_text="Modulo:     8%3",		bg=color_B)
-		self.create_button(root,"^" ,5,6,font=font,command=self.b_pow,hint_text="Umocnění:     2^e",	bg=color_B)
-		self.create_button(root,"√" ,6,5,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81",	bg=color_B)
-		self.create_button(root,"√(x,n)",6,6,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_B)
-
-		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=color_A,relief=tk.RAISED,activebackground="#0096c7")
+		self.create_button(root,"AC",4,6,font=font,command=self.b_ac,hint_text="Smazat všechno", bg=color_C)
+		self.create_button(root,"x",5,5,font=font,command=self.b_times, bg=color_A)
+		self.create_button(root,"/",5,6,font=font,command=self.b_div, bg=color_A)
+		self.create_button(root,"+",6,5,font=font,command=self.b_plus, bg=color_A)
+		self.create_button(root,"-",6,6,font=font,command=self.b_minus, bg=color_A)	
+		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=num_but_color,relief=tk.RAISED,activebackground="#0096c7")
 		b_eq.grid(columnspan=2,row=7,column=5)
 
 	##	Function initializes all the UI elements.
