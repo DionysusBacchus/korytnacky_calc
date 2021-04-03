@@ -2,8 +2,8 @@
 # @file UI.py
 #
 
-
 import tkinter as tk
+
 
 ##
 # 	@biref Class that creates a window with all UI elements for a calculator.
@@ -22,7 +22,8 @@ class UI():
 	#	Takes 1 argument representing the expression. Needs to be set using 'set_submit_callback()'.
 	submit_callback = None
 
-	##	Dictionary mapping key symbols to functions. Used in 'key_pressed()'
+	##	Dictionary mapping key symbols to functions. Used in 'key_pressed()'.
+	#	Initialized in the constructor.
 	key_handler = None
 
 	##	Constructor only initializes global variables. To create the window use 'start_loop()'.
@@ -50,6 +51,7 @@ class UI():
 			"parenleft": self.b_left_br,
 			"parenright": self.b_right_br,
 			"x": self.b_times,
+			"asterisk": self.b_times,
 			"slash": self.b_div,
 			"plus": self.b_plus,
 			"minus": self.b_minus,
@@ -70,7 +72,6 @@ class UI():
 			print("submit_callback not defined!")
 		else:
 			submit_callback(self.get_expr())
-
 
 	##	Function creates a button with given text on given position in the grid.
 	#	@param root Root window
@@ -134,7 +135,7 @@ class UI():
 		self.create_button(root,"%" ,5,5,font=font,command=self.b_mod,hint_text="Modulo:     8%3",		bg=color_B)
 		self.create_button(root,"^" ,5,6,font=font,command=self.b_pow,hint_text="Umocnění:     2^e",	bg=color_B)
 		self.create_button(root,"√" ,6,5,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81",	bg=color_B)
-		self.create_button(root,"√(x,n)",6,6,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu √(x,n):     √(27,3)",bg=color_B)
+		self.create_button(root,"√(x,n)",6,6,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_B)
 
 		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=color_A,relief=tk.RAISED,activebackground="#0096c7")
 		b_eq.grid(columnspan=2,row=7,column=5)
@@ -184,7 +185,7 @@ class UI():
 		global root
 		root = tk.Tk()
 
-		root.bind("<KeyRelease>",self.key_pressed)
+		root.bind("<KeyPress>",self.key_pressed)
 
 		self.setup(root)
 
@@ -220,6 +221,12 @@ class UI():
 	#	@param add String to be appended.
 	def append_expr(self,add):
 		expr = self.get_expr()
+		l=len(expr)
+
+		# If error was displayed, the screen is cleared
+		if expr[:l] == "SyntaxError"[:l] or expr[:l] == "MathError"[:l]:
+			expr = ""
+
 		expr += add
 		self.set_expr(expr)
 
@@ -321,8 +328,3 @@ class UI():
 
 	def b_nroot(self):
 		self.append_expr("√(")
-
-
-
-
-
