@@ -11,11 +11,13 @@ from math import *
 import re
 
 
-#string = "√(10-28)"
+string = "√(-8,3)"
 
 ##  Constructor of root function 
 def sqrt(x,n=2):
-    if n%2 == 1:
+    if x == 0:
+        return 0
+    if x < 0:
         ans = -(-x)**(1./n)
     else: 
         ans = x**(1./n)
@@ -40,11 +42,11 @@ def convert(string):
 def submit(string):
     string = convert(string)
     ans = eval(string)
-    #print (string)
-    #print (ans)
+    print (string)
+    print (ans)
     
     #set_display_output(ans)
     return ans 
 
 
-#submit(string)
+submit(string)
