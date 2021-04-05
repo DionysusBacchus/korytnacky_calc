@@ -17,6 +17,8 @@ def sqrt(x,n=2):
 def convert(string):
     string = string.replace("√" ,"sqrt")
     string = string.replace("^","**")
+    string = string.replace("e","2.718281828459045")
+    string = string.replace("π","3.141592653589793")
     if "!" in string:
         string = re.sub(r'([\w+])!|\((.+?)\)!',r'factorial(\1\2)',string)
     if "|" in string:
