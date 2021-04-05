@@ -1,12 +1,20 @@
 ##@package
 #\file math.py
 #\brief Math package for calculator
-#This package contains declarations for math functions: +,-,*,/,!,^,^-1/x,..., evalute function
+#This package contains declarations for math functions: √,+,-,*,/,!,^,^-1/x,..., evalute function
 #
 
 ##  
-#   
+#
+
+from math import *
+#definitions = {'√':sqrt,'^': pow} 
+string = "√2"   
 def submit(string):
-    answer = 0
-    eval("nroot(2+5)+nroot(2,5)")
-    set_display_output(answer) 
+    string = string.replace("√" ,"sqrt")
+    ans = eval(string)
+    print (ans)
+    #set_display_output(ans) 
+
+
+submit(string)
