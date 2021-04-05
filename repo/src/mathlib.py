@@ -40,8 +40,8 @@ def convert(string):
 def submit(string):
     string = convert(string)
     ans = eval(string)
-    print (string)
-    print (ans)
+    #print (string)
+    #print (ans)
     
     #set_display_output(ans)
     return ans 
