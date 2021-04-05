@@ -188,13 +188,13 @@ class TestSubmitComplex(unittest.TestCase):
     
     def test_pro_int(self):
         res = mathlib.submit('2!+5*√(-8,3)')
-        self.assertEqual(res,-14)
+        self.assertEqual(res,-14)                       #something is wrong in mathlib.py and i dont really know what :)
         res = mathlib.submit('(-4)^2/1!')
         self.assertEqual(res,16)
     
     def test_basics_double(self):
         res = mathlib.submit('(4.091+0.009)*1.5')
-        self.assertAlmostEqual(res,7.5,8)
+        self.assertAlmostEqual(res,7.5,8)               #answer on my caluculator is 6.15, tried it several times with different caluclators
         res = mathlib.submit('14.2/2-7.1')
         self.assertAlmostEqual(res,0,8)
         res = mathlib.submit('-8.16*4/3+9')
@@ -204,9 +204,9 @@ class TestSubmitComplex(unittest.TestCase):
 
     def test_pro_double(self):
         res = mathlib.submit('(4.091+0.009)^2-1.5*4')
-        self.assertAlmostEqual(res,19,8)
+        self.assertAlmostEqual(res,19,8)                #answer on my caluculator is 10.81, tried it several times with different caluclators
         res = mathlib.submit('(4.091+0.009)^2-√(1.44)*5+0.12345678')
-        self.assertAlmostEqual(res,20.12345678,8)
+        self.assertAlmostEqual(res,20.12345678,8)       #answer on my caluculator is 10.933456789, tried it several times with different caluclators
 
     def test_forbidden(self):
         with self.assertRaises(ZeroDivisionError):
@@ -218,15 +218,15 @@ class TestSubmitComplex(unittest.TestCase):
         with self.assertRaises(ValueError):
             mathlib.submit('(0.18724)!')
         with self.assertRaises(ValueError):
-            mathlib.submit('√(10-28)')
+            mathlib.submit('√(10-28)')          #Not an error but answer is complex number
         with self.assertRaises(ValueError):
-            mathlib.submit('√(0.5-28)')
+            mathlib.submit('√(0.5-28)')         #Not an error but answer is complex number
         with self.assertRaises(ValueError):
-            mathlib.submit('√(10-28,6)')
+            mathlib.submit('√(10-28,6)')        #Not an error but answer is complex number
         with self.assertRaises(ValueError):
-            mathlib.submit('(10-28,6)^-4')
+            mathlib.submit('(10-28,6)^-4')      #Not sure what should it mean 
         with self.assertRaises(ValueError):
-            mathlib.submit('(10-28,6)^0.5')
+            mathlib.submit('(10-28,6)^0.5')     #same here
 
 
 if __name__ == '__main__':
