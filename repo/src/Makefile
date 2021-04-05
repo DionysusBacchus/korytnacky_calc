@@ -6,3 +6,5 @@ math:
 	python3 mathlib.py
 prof:
 	python3 profiling.py
+UI:
+	python3 UI_template.py

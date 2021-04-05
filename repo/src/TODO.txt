@@ -3,35 +3,42 @@ MATH FUNCTIONS: add
                 div
                 mul
                 modulo
-                factorial
-                pow
-                Ans -returns last answer
-                nroot(x,n) - returns n root of x
-                nroot(x)   - retruns square root of x  
+                factorial(x) 
+                pow(x,n)   - returns x to the n'th power, n>=0
+                nroot(x,n) - returns n root of x, n>=0
+                nroot(x)   - returns square root of x 
+                absolute(x)- returns absolute value of x
+
+                ans -returns last answer
+                
 
 Math constant:  e   - 2.718281828459045
                 pi  - 3.141592653589793
 
 Decimal precision - 8 digits
 
-submit  - at the end calls set_display_output(string)  
+submit  - at the end calls set_display_output(string), returns ans or err
         - Error handling: "SyntaxError"/"MathError"
 
 evaluate- calls math functions and evaluate string. Retruns answer
 
 Inerface:   e
-            Π
+            π
             Ans
             +
             -
             *
             /
+            %
             ^
             √(x,n)
             (                
             )
             !
-            = - submit(string) return none
+            |
+            = - submit(string) returns error or ans
             .
+            <- (backspace)
+            clear all
 
 Error handling: In case user is an idiot .... F*** YOU :) 
