@@ -1,7 +1,7 @@
 ##@package
 #\file math.py
 #\brief Math package for calculator
-#This package contains declarations for math functions: √,+,-,*,/,!,^,^-1/x,..., evalute function
+#This package contains evaluation and calculating of string input from UI 
 #
 
 ##  
@@ -10,10 +10,21 @@
 from math import *
 import re
 
-string = "-1*5-15"
-def sqrt(x,n=2):
-    return x**(1/float(n))
 
+#string = "√(10-28)"
+
+##  Constructor of root function 
+def sqrt(x,n=2):
+    if n%2 == 1:
+        ans = -(-x)**(1./n)
+    else: 
+        ans = x**(1./n)
+    if isinstance(ans, complex):
+        raise ValueError("Answer is complex number")
+    else:
+        return ans
+
+##  Function which convert input string and returns edited string usable in evaluation
 def convert(string):
     string = string.replace("√" ,"sqrt")
     string = string.replace("^","**")
@@ -25,6 +36,7 @@ def convert(string):
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     return string
 
+##  Function which is used to submit and convert 
 def submit(string):
     string = convert(string)
     ans = eval(string)
@@ -35,4 +47,4 @@ def submit(string):
     return ans 
 
 
-submit(string)
+#submit(string)
