@@ -1,5 +1,7 @@
 #Project Makefile
 all:
+	python3 main.py
+test:
 	python3 mathlib.py
 	python3 profiling.py
 math:
