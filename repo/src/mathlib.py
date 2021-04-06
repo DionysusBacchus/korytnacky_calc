@@ -9,13 +9,16 @@
 
 from math import *
 import re
+import UI 
 
 
-#string = "√(10-28)"
+#string = "√(-8,3)"
 
 ##  Constructor of root function 
 def sqrt(x,n=2):
-    if n%2 == 1:
+    if x == 0:
+        return 0
+    if x < 0:
         ans = -(-x)**(1./n)
     else: 
         ans = x**(1./n)
@@ -28,6 +31,7 @@ def sqrt(x,n=2):
 def convert(string):
     string = string.replace("√" ,"sqrt")
     string = string.replace("^","**")
+    string = string.replace("x","*")
     string = string.replace("e","2.718281828459045")
     string = string.replace("π","3.141592653589793")
     if "!" in string:
@@ -42,9 +46,11 @@ def submit(string):
     ans = eval(string)
     #print (string)
     #print (ans)
-    
-    #set_display_output(ans)
+    window.set_expr(ans)
     return ans 
 
+window = UI.UI()
+window.set_submit_callback(submit)
+window.start_loop()
 
 #submit(string)
