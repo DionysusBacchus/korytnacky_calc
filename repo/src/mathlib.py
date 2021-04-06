@@ -61,7 +61,7 @@ def submit(string):
     except SyntaxError:
         set_expr("Chyba syntaxe")
     except ValueError:
-        set_expr("Neplatný vstup)
+        set_expr("Neplatný vstup")
     else:
         set_expr(answer)
         Ans = answer
