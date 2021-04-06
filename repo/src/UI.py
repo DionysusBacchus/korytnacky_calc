@@ -54,6 +54,7 @@ class UI():
 			"KP_8": self.b_8,
 			"KP_9": self.b_9,
 			"e": self.b_e,
+			"p": self.b_pi,
 			"comma": self.b_sepp,
 			"period": self.b_dot,
 			"KP_Decimal": self.b_dot,
@@ -137,19 +138,19 @@ class UI():
 
 		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793", bg=color_B)
 		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045", bg=color_B)
-		self.create_button(root, ",", 3, 2,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
 
-		self.create_button(root,"(",4,0,font=font,command=self.b_left_br, bg=color_A)
-		self.create_button(root,")",4,1,font=font,command=self.b_right_br, bg=color_A)
-		self.create_button(root,"%" ,5,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
-		self.create_button(root,"^" ,5,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_B)
-		self.create_button(root,"√" ,6,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_B)
-		self.create_button(root,"√(x,n)",6,1,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_B)
+		self.create_button(root,"%" ,6,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
+		self.create_button(root, ",", 6, 1,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
+		self.create_button(root,"^" ,4,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_A)
+		self.create_button(root,"√" ,5,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_A)
+		self.create_button(root,"√(x,n)",5,1,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_A)
 		self.create_button(root,"!",7,0,font=font,command=self.b_fact,hint_text="Faktoriál:     5!", bg=color_B)
 		self.create_button(root,"|",7,1,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|", bg=color_B)
 
-		self.create_button(root,"<-",4,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
-		self.create_button(root,"AC",4,6,font=font,command=self.b_ac,hint_text="Smazat všechno", bg=color_C)
+		self.create_button(root,"<-",3,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
+		self.create_button(root,"AC",3,6,font=font,command=self.b_ac,hint_text="Smazat všechno", bg=color_C)
+		self.create_button(root, "(", 4, 5, font=font, command=self.b_left_br, bg=color_B)
+		self.create_button(root, ")", 4, 6, font=font, command=self.b_right_br, bg=color_B)
 		self.create_button(root,"x",5,5,font=font,command=self.b_times, bg=color_A)
 		self.create_button(root,"/",5,6,font=font,command=self.b_div, bg=color_A)
 		self.create_button(root,"+",6,5,font=font,command=self.b_plus, bg=color_A)
