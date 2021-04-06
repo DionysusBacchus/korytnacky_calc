@@ -61,6 +61,4 @@ def submit(string):
         Ans = answer
     return answer 
 
-window = UI.UI()
-window.set_submit_callback(submit)
-window.start_loop()
+
