@@ -10,6 +10,7 @@
 from math import *
 import re
 import UI 
+import signal
 
 ## Function for comunication with other scripts
 set_expr = None
@@ -17,6 +18,12 @@ def set_set_expr(foo):
     global set_expr
     set_expr = foo
 
+
+def timeout_handler(num, stack):
+    print ("Recived SIGALRM")
+    set_expr("Príliš komplikované na výpočet")
+    raise Exception("Takes too long to calculate")
+    
 
 ##  Constructor of root function 
 def sqrt(x,n=2):
@@ -55,9 +62,15 @@ def submit(string):
     print (string)
     try:
         global Ans
-        answer = 0
-        answer = eval(string,globals())
-        print (answer)
+        signal.signal(signal.SIGALRM, timeout_handler)
+        signal.alarm(8)
+        try:
+            answer = 0
+            answer = eval(string,globals())
+            print (answer)
+        finally:
+            signal.alarm(0)
+    
     except ZeroDivisionError:
         set_expr("Nulou se nedá dělit")
     except SyntaxError:
