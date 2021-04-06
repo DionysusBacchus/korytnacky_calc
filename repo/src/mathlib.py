@@ -48,11 +48,11 @@ def submit(string):
         global Ans
         answer = eval(string,globals())
     except ZeroDivisionError:
-        window.set_expr("Math error")
+        window.set_expr("MathError")
     except SyntaxError:
-        window.set_expr("Syntax error")
+        window.set_expr("SyntaxError")
     except ValueError:
-        window.set_expr("Math error")
+        window.set_expr("MathError")
     else:
         window.set_expr(answer)
         Ans = answer
