@@ -11,6 +11,12 @@ from math import *
 import re
 import UI 
 
+set_expr = None
+
+def set_set_expr(foo):
+    global set_expr
+    set_expr = foo
+
 
 ##  Constructor of root function 
 def sqrt(x,n=2):
@@ -51,13 +57,13 @@ def submit(string):
         answer = 0
         answer = eval(string,globals())
     except ZeroDivisionError:
-        window.set_expr("MathError")
+        set_expr("Nulou se nedá dělit")
     except SyntaxError:
-        window.set_expr("SyntaxError")
+        set_expr("Chyba syntaxe")
     except ValueError:
-        window.set_expr("MathError")
+        set_expr("Neplatný vstup)
     else:
-        window.set_expr(answer)
+        set_expr(answer)
         Ans = answer
     return answer 
 
