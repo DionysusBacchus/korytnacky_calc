@@ -99,7 +99,7 @@ class UI():
 	#	@param hint_text Text to be displayed on the hint display when hovered over
 	#	@param extra Optional arguments passed to tk.Button() constructor
 	def create_button(self,root,text,row,col,hint_text="",**extra):
-		b = tk.Button(root,text=text,width=4,height=2,activebackground="#0096c7",relief=tk.RAISED,**extra)
+		b = tk.Button(root,text=text,width=4,height=2,activebackground="#b7e4c7",relief=tk.RAISED,**extra)
 		b.grid(row=row,column=col)
 
 		if hint_text != "":
@@ -140,11 +140,11 @@ class UI():
 		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045", bg=color_B)
 
 		self.create_button(root,"%" ,6,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
-		self.create_button(root, ",", 6, 1,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
+		self.create_button(root, ",", 5, 1,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
 		self.create_button(root,"^" ,4,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_A)
-		self.create_button(root,"√" ,5,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_A)
-		self.create_button(root,"√(x,n)",5,1,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_A)
-		self.create_button(root,"!",7,0,font=font,command=self.b_fact,hint_text="Faktoriál:     5!", bg=color_B)
+		self.create_button(root,"√" ,4,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_A)
+		self.create_button(root,"√(x,n)",5,0,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_A)
+		self.create_button(root,"!",6,1,font=font,command=self.b_fact,hint_text="Faktoriál:     5!", bg=color_B)
 		self.create_button(root,"|",7,1,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|", bg=color_B)
 
 		self.create_button(root,"<-",3,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
@@ -155,7 +155,7 @@ class UI():
 		self.create_button(root,"/",5,6,font=font,command=self.b_div, bg=color_A)
 		self.create_button(root,"+",6,5,font=font,command=self.b_plus, bg=color_A)
 		self.create_button(root,"-",6,6,font=font,command=self.b_minus, bg=color_A)	
-		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=num_but_color,relief=tk.RAISED,activebackground="#0096c7")
+		b_eq=tk.Button(root,command=self.submit_expr,text="=",width=10,height=2,font=font,bg=num_but_color,relief=tk.RAISED,activebackground="#b7e4c7")
 		b_eq.grid(columnspan=2,row=7,column=5)
 
 	##	Function initializes all the UI elements.
