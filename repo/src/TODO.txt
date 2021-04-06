@@ -18,7 +18,7 @@ Math constant:  e   - 2.718281828459045
 Decimal precision - 8 digits
 
 submit  - at the end calls set_display_output(string), returns ans or err
-        - Error handling: "SyntaxError"/"MathError"
+        - Error handling: "Nulou se nedá dělit/Neplatný vstup/Chyba syntaxe"
 
 evaluate- calls math functions and evaluate string. Retruns answer
 
