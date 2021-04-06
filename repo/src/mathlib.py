@@ -19,7 +19,7 @@ def set_set_expr(foo):
     global set_expr
     set_expr = foo
 
-
+##  Function which handles error in case of infite calucluation
 def timeout_handler(num, stack):
     print ("Recived SIGALRM")
     set_expr("Príliš komplikované na výpočet")
@@ -64,16 +64,16 @@ def convert(string):
 ##  Function which is used to submit and convert
 def submit(string):
     global Ans
-    print ("Previous ans= " + str(Ans))
+    #print ("Previous ans= " + str(Ans))
     string = convert(string)
-    print (string)
+    #print (string)
     try:
         signal.signal(signal.SIGALRM, timeout_handler)
         signal.alarm(8)
         try:
             answer = 0
             answer = eval(string,globals())
-            print (answer)
+            #print (answer)
         finally:
             signal.alarm(0)
     
@@ -90,12 +90,12 @@ def submit(string):
     except OverflowError:
         set_expr("Výsledek mimo maximálnej rozsah")
     else:
-        answer = float(answer)
-        answer = ('%f' % answer).rstrip('0').rstrip('.')
-        print (answer)
+        
+        answer = ('%.15f' % float(answer)).rstrip('0').rstrip('.')
+        #print (answer)
         set_expr(answer)
         Ans = answer
-        print (Ans)
+        #print (Ans)
         return answer
 
         
