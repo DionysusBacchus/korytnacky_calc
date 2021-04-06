@@ -36,6 +36,8 @@ def convert(string):
         string = re.sub(r'([\w+])!|\((.+?)\)!',r'factorial(\1\2)',string)
     if "|" in string:
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
+    if "sqrt" in string:
+        string = re.sub(r'sqrt\((.+?)\)|sqrt(.+?)',r'sqrt(\1\2)',string)
     return string
 
 
@@ -46,6 +48,7 @@ def submit(string):
     string = convert(string)
     try:
         global Ans
+        answer = 0
         answer = eval(string,globals())
     except ZeroDivisionError:
         window.set_expr("MathError")
