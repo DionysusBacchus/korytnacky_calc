@@ -12,8 +12,6 @@ import re
 import UI 
 
 
-#string = "√(-8,3)"
-
 ##  Constructor of root function 
 def sqrt(x,n=2):
     if x == 0:
@@ -40,17 +38,26 @@ def convert(string):
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     return string
 
-##  Function which is used to submit and convert 
+
+##  Variable witch holds previous answer
+Ans = 0
+##  Function which is used to submit and convert
 def submit(string):
     string = convert(string)
-    ans = eval(string)
-    #print (string)
-    #print (ans)
-    window.set_expr(ans)
-    return ans 
+    try:
+        global Ans
+        answer = eval(string,globals())
+    except ZeroDivisionError:
+        window.set_expr("Math error")
+    except SyntaxError:
+        window.set_expr("Syntax error")
+    except ValueError:
+        window.set_expr("Math error")
+    else:
+        window.set_expr(answer)
+        Ans = answer
+    return answer 
 
 window = UI.UI()
 window.set_submit_callback(submit)
 window.start_loop()
-
-#submit(string)
