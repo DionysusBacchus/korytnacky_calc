@@ -32,49 +32,50 @@ class TestFactorial(unittest.TestCase):
 class TestAbsolute(unittest.TestCase):
     
     def test_ints(self):
-        self.assertEqual(mathlib.absolute(0),0)
-        self.assertEqual(mathlib.absolute(-8),8)
-        self.assertEqual(mathlib.absolute(55),55)
+        res = mathlib.submit('|0|')
+        self.assertEqual(res,0)
+        res = mathlib.submit('|-8|')
+        self.assertEqual(res,8)
+        res = mathlib.submit('|55|')
+        self.assertEqual(res,55)
 
     def test_doubles(self):
-        self.assertAlmostEqual(mathlib.absolute(1.6),1.6,8) #? Proc tady 2 hodnoty s carkou? 
-        self.assertAlmostEqual(mathlib.absolute(-0.00000001),0.00000001,8)
-        self.assertAlmostEqual(mathlib.absolute(-56.9),56.9,8)
-    
-    def test_through_submit(self):
-        res = mathlib.submit('|-4|')
-        self.assertEqual(res,4)
-        res = mathlib.submit('|18|')
-        self.assertEqual(res,18)
-        res = mathlib.submit('|-0.00016574|')
-        self.assertAlmostEqual(res,0.00016574,8)
-        res = mathlib.submit('|0.74|')
-        self.assertAlmostEqual(res,0.74,8)
+        res = mathlib.submit('|1.6|')
+        self.assertAlmostEqual(res,1.6,8)
+        res = mathlib.submit('|-0.00000001|')
+        self.assertAlmostEqual(res,0.00000001,8)
+        res = mathlib.submit('|-56.9|')
+        self.assertAlmostEqual(res,56.9,8)
 
 #Noncompulsory modulo (%) function
 class TestModulo(unittest.TestCase):
 
     def test_forbidden(self):
-        with self.assertRaises(ZeroDivisionError):
-            mathlib.modulo(8,0)
+        res = mathlib.submit('4%0')
+        self.assertEqual(res,'Nulou se nedá dělit')
 
     def test_pos(self):
-        self.assertEqual(mathlib.modulo(5,4),1)
-        self.assertEqual(mathlib.modulo(5,5),0)
-        self.assertEqual(mathlib.modulo(1,5),1)
+        res = mathlib.submit('5%4')
+        self.assertEqual(res,1)
+        res = mathlib.submit('5%5')
+        self.assertEqual(res,0)
+        res = mathlib.submit('1%5')
+        self.assertEqual(res,1)
 
     def test_neg(self):
-        self.assertEqual(mathlib.modulo(-114,-5),-4)
-        self.assertEqual(mathlib.modulo(-14,-7),0)
-        self.assertEqual(mathlib.modulo(-7,-10),-7)
+        res = mathlib.submit('-114%-5')
+        self.assertEqual(res,-4)
+        res = mathlib.submit('-14%7')
+        self.assertEqual(res,0)
+        res = mathlib.submit('-7%-10')
+        self.assertEqual(res,-7)
 
     def test_mixed(self):
-        self.assertEqual(mathlib.modulo(-114,5),-4)
-        self.assertEqual(mathlib.modulo(114,-5),4)
+        res = mathlib.submit('-114%5')
+        self.assertEqual(res,-4)
+        res = mathlib.submit('114%-5')
+        self.assertEqual(res,4)
     
-    def test_through_submit(self):
-        res = mathlib.submit('14%6')
-        self.assertEqual(res,2)
 
 class TestSquareRoot(unittest.TestCase):
 
