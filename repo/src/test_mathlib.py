@@ -141,26 +141,29 @@ class TestPow(unittest.TestCase):
         self.assertAlmostEqual(res,1)
 
     def test_neg_double(self):
-        self.assertAlmostEqual(mathlib.pow(-0.2,3),-0.008,8)
-        self.assertAlmostEqual(mathlib.pow(-0.01,4),float(1e-8),8)
-        self.assertAlmostEqual(mathlib.pow(-0.2,0),1,8)
+        res = mathlib.submit('-0.2^3')
+        self.assertAlmostEqual(res,-0.008,8)
+        res = mathlib.submit('-0.01^4')
+        self.assertAlmostEqual(res,float(1e-8),8)
+        res = mathlib.submit('-0.2^0')
+        self.assertAlmostEqual(res,1,8)
 
 class TestSubmitComplex(unittest.TestCase):
 
     #Each bracket has to have a complementary one
     def test_brackets(self):
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('(4+5*2')
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('4+5)*2')
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('(4+5)*2)')
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('((4+5)*2')
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('|4+5)*2)')
-        with self.assertRaises(SyntaxError):
-            mathlib.submit('|(4+5)|*2|')
+        res = mathlib.submit('(4+5*2')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('4+5)*2')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('(4+5)*2)')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('((4+5)*2')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('|4+5)*2)')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('|(4+5)|*2|')
+        self.assertEqual(res,'Chyba syntaxe')
     
     def test_basics_int(self):
         res = mathlib.submit('(4+5)*2')
@@ -197,20 +200,20 @@ class TestSubmitComplex(unittest.TestCase):
         self.assertAlmostEqual(res,10.933456789,8)
 
     def test_forbidden(self):
-        with self.assertRaises(ZeroDivisionError):
-            mathlib.submit('12/0')
-        with self.assertRaises(ZeroDivisionError):
-            mathlib.submit('1.15/0')
-        with self.assertRaises(ValueError):
-            mathlib.submit('(14-28)!')
-        with self.assertRaises(ValueError):
-            mathlib.submit('(0.18724)!')
-        with self.assertRaises(ValueError):
-            mathlib.submit('√(10-28)')
-        with self.assertRaises(ValueError):
-            mathlib.submit('√(0.5-28)')
-        with self.assertRaises(ValueError):
-            mathlib.submit('√(10-28,6)')
+        res = mathlib.submit('12/0')
+        self.assertEqual(res,'Nulou se nedá dělit')
+        res = mathlib.submit('1.15/0')
+        self.assertEqual(res,'Nulou se nedá dělit')
+        res = mathlib.submit('(14-28)!')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('(0.18724)!')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('√(10-28)')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('√(0.5-28)')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('√(10-28,6)')
+        self.assertEqual(res,'Neplatný vstup')
 
 if __name__ == '__main__':
     unittest.main()
