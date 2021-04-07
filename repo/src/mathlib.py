@@ -10,7 +10,21 @@
 from math import *
 import re
 import UI 
+import signal
 
+
+## Function for comunication with other scripts
+set_expr = None
+def set_set_expr(foo):
+    global set_expr
+    set_expr = foo
+
+##  Function which handles error in case of infite calucluation
+def timeout_handler(num, stack):
+    print ("Recived SIGALRM")
+    set_expr("Príliš komplikované na výpočet")
+    raise Exception("Takes too long to calculate")
+    
 
 ##  Constructor of root function 
 def sqrt(x,n=2):
@@ -19,46 +33,71 @@ def sqrt(x,n=2):
     if x < 0:
         ans = -(-x)**(1./n)
     else: 
-        ans = x**(1./n)
+        ans = x**(1/n)
     if isinstance(ans, complex):
         raise ValueError("Answer is complex number")
     else:
         return ans
+##  Variable witch holds previous answer
+Ans = 0
 
 ##  Function which convert input string and returns edited string usable in evaluation
 def convert(string):
+    global Ans
     string = string.replace("√" ,"sqrt")
     string = string.replace("^","**")
     string = string.replace("x","*")
     string = string.replace("e","2.718281828459045")
     string = string.replace("π","3.141592653589793")
+    string = string.replace("Ans",str(Ans))
     if "!" in string:
-        string = re.sub(r'([\w+])!|\((.+?)\)!',r'factorial(\1\2)',string)
+        string = re.sub(r'([\w]+)!|\(([\w]+)\)!',r'factorial(\1\2)',string)
     if "|" in string:
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     if "sqrt" in string:
-        string = re.sub(r'sqrt\((.+?)\)|sqrt(.+?)',r'sqrt(\1\2)',string)
+        string = re.sub(r'sqrt\(([\w]+)\)|sqrt(([\w]+))',r'sqrt(\1\2)',string)
     return string
 
 
-##  Variable witch holds previous answer
-Ans = 0
+
+
 ##  Function which is used to submit and convert
 def submit(string):
+    global Ans
+    #print ("Previous ans= " + str(Ans))
     string = convert(string)
+    #print (string)
     try:
-        global Ans
-        answer = 0
-        answer = eval(string,globals())
+        signal.signal(signal.SIGALRM, timeout_handler)
+        signal.alarm(8)
+        try:
+            answer = 0
+            answer = eval(string,globals())
+            #print (answer)
+        finally:
+            signal.alarm(0)
+    
     except ZeroDivisionError:
-        window.set_expr("MathError")
+        set_expr("Nulou se nedá dělit")
     except SyntaxError:
-        window.set_expr("SyntaxError")
+        set_expr("Chyba syntaxe")
     except ValueError:
-        window.set_expr("MathError")
+        set_expr("Neplatný vstup")
+    except NameError:
+        set_expr("Chyba syntaxe")
+    except TypeError:
+        set_expr("Chyba syntaxe")
+    except OverflowError:
+        set_expr("Výsledek mimo maximálnej rozsah")
     else:
-        window.set_expr(answer)
+        
+        answer = ('%.15f' % float(answer)).rstrip('0').rstrip('.')
+        #print (answer)
+        set_expr(answer)
         Ans = answer
-    return answer 
+        #print (Ans)
+        return answer
+
+        
 
 

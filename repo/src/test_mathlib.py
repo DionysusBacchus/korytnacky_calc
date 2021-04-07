@@ -2,6 +2,8 @@
 #
 
 import mathlib
+mathlib.set_set_expr(lambda x : x == 2)
+
 import unittest
 
 class TestFactorial(unittest.TestCase):

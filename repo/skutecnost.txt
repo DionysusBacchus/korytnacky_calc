@@ -2,6 +2,7 @@
 
 20.03. Stretnutie sa neuskutočnilo z důvodu nepritomnosti člena (cesta domov z brna) preložene na 21.03 (To už sa nám podarilo :) )
 
-26.03 Bylo zjištěno, že je potřeba mít nějaký extra-nouzový kanal pro komunikaci, pokud člen týmu není přitomen na Discordu, ani neodepisuje na maily. Bylo rozhodnuto přídat do komunikačních kanalu volání přes mobil, aby byla možnost se do někoho dovolat jen v extremních případech.
+26.03 Bylo zjištěno, že je potřeba mít nějaký extra-nouzový kanal pro komunikaci, pokud člen týmu není přitomen na Discordu, ani neodepisuje na           maily. Bylo rozhodnuto přídat do komunikačních kanalu volání přes mobil, aby byla možnost se do někoho dovolat jen v extremních případech.
 
 2.04  Setkání se neuskutečnilo kvůli odevzdaní projektu z jiného předmětu (neměli jsme čas). 
+      Moc se nepovedlo dodržet strukturu TDD, během psání samotného kodu kalkulačky byly zjištěny chyby v testech, takže byla potřeba je opravit, a       ta oprava už byla ovlivněná existujícím programem. 
