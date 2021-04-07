@@ -13,7 +13,7 @@ class TestFactorial(unittest.TestCase):
         res = mathlib.submit('-4!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('(-4)!')
-        self.assertEqual(res,'Chyba syntaxe')
+        self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('0.1!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('-0.68!')
@@ -199,14 +199,13 @@ class TestSubmitComplex(unittest.TestCase):
         res = mathlib.submit('(4.091+0.009)^2-√(1.44)*5+0.12345678')
         self.assertAlmostEqual(res,10.93345678,8)
 
-    #siki repair factorial pls <3
     def test_forbidden(self):
         res = mathlib.submit('12/0')
         self.assertEqual(res,'Nulou se nedá dělit')
         res = mathlib.submit('1.15/0')
         self.assertEqual(res,'Nulou se nedá dělit')
         res = mathlib.submit('(14-28)!')
-        self.assertEqual(res,'Chyba syntaxe')
+        self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('(0.18724)!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('√(10-28)')
