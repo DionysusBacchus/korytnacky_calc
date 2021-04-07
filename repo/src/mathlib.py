@@ -22,7 +22,7 @@ def set_set_expr(foo):
 ##  Function which handles error in case of infite calucluation
 def timeout_handler(num, stack):
     print ("Recived SIGALRM")
-    set_expr("Príliš komplikované na výpočet")
+    set_expr("Příliš komplikované")
     raise Exception("Takes too long to calculate")
     
 
@@ -30,8 +30,22 @@ def timeout_handler(num, stack):
 def sqrt(x,n=2):
     if x == 0:
         return 0
+    if n == 0:
+        raise ValueError
+        set_expr("Neplatný vstup")
+        return "CATCH"
+    if isinstance(n,float):
+        raise ValueError
+        set_expr("Neplatný vstup")
+        return "CATCH"
     if x < 0:
-        ans = -(-x)**(1./n)
+        if n%2 == 0:
+            raise ValueError
+            set_expr("Neplatný vstup")
+            return "Neplatný vstup"
+        else:
+            ans = -(-x)**(1./n)
+
     else: 
         ans = x**(1/n)
     if isinstance(ans, complex):
@@ -51,7 +65,7 @@ def convert(string):
     string = string.replace("π","3.141592653589793")
     string = string.replace("Ans",str(Ans))
     if "!" in string:
-        string = re.sub(r'([\w]+)!|\(([\w]+)\)!',r'factorial(\1\2)',string)
+        string = re.sub(r'-([0-9]+.[0-9]+)!|([0-9]+.[0-9]+)!|([0-9]+)!|-([0-9.]+)!|\((.+?)\)!',r'factorial(\1\2\3)',string)
     if "|" in string:
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     if "sqrt" in string:
@@ -66,12 +80,15 @@ def submit(string):
     global Ans
     #print ("Previous ans= " + str(Ans))
     string = convert(string)
-    #print (string)
+    if "CATCH" in string:
+        set_expr("Neplatný vstup")
+        return "Neplatný vstup"
     try:
         signal.signal(signal.SIGALRM, timeout_handler)
         signal.alarm(8)
         try:
             answer = 0
+            #print (string)
             answer = eval(string,globals())
             #print (answer)
         finally:
@@ -79,14 +96,19 @@ def submit(string):
     
     except ZeroDivisionError:
         set_expr("Nulou se nedá dělit")
+        return "Nulou se nedá dělit"
     except SyntaxError:
         set_expr("Chyba syntaxe")
+        return "Chyba syntaxe"
     except ValueError:
         set_expr("Neplatný vstup")
+        return "Neplatný vstup"
     except NameError:
         set_expr("Chyba syntaxe")
+        return "Chyba syntaxe"
     except TypeError:
-        set_expr("Chyba syntaxe")
+        set_expr("Neplatný vstup")
+        return "Neplatný vstup"
     except OverflowError:
         set_expr("Výsledek mimo maximálnej rozsah")
     else:
@@ -96,7 +118,7 @@ def submit(string):
         set_expr(answer)
         Ans = answer
         #print (Ans)
-        return answer
+        return float(answer)
 
         
 
