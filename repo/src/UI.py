@@ -201,7 +201,7 @@ class UI():
 		# Creating display
 		global display
 		display = tk.Text(root,width=25,height=5,font=display_font,bg=display_color,fg=display_text_color)
-		display.configure(insertwidth=3,insertbackground=display_text_color)
+		display.configure(insertwidth=3,insertbackground=display_text_color,highlightthickness=0)
 		display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
 		display.bind("<Key>",self.key_pressed)
 		self.create_buttons(root)
@@ -404,7 +404,9 @@ class UI():
 
 	def b_abs(self):
 		self.prepare_display(always_clear=True)
-		self.append_expr("|")
+		self.append_expr("||")
+		global display
+		display.mark_set(tk.INSERT, "insert-1c")
 		return "break"
 
 	def b_back(self):
@@ -412,8 +414,10 @@ class UI():
 		global display
 		last_3 = display.get("insert-3c","insert")
 		if(last_3 == "Ans"):
-			display.delete("insert-2c",tk.INSERT)
-		return 1
+			display.delete("insert-3c",tk.INSERT)
+		else:
+			display.delete("insert-1c")
+		return "break"
 
 	def b_ac(self):
 		self.set_expr("")
@@ -426,15 +430,21 @@ class UI():
 
 	def b_pow(self):
 		self.prepare_display()
-		self.append_expr("^")
+		self.append_expr("^()")
+		global display
+		display.mark_set(tk.INSERT, "insert-1c")
 		return "break"
 
 	def b_sqrt(self):
 		self.prepare_display(always_clear=True)
-		self.append_expr("√")
+		self.append_expr("√()")
+		global display
+		display.mark_set(tk.INSERT,"insert-1c")
 		return "break"
 
 	def b_nroot(self):
 		self.prepare_display(always_clear=True)
-		self.append_expr("√(")
+		self.append_expr("√(,)")
+		global display
+		display.mark_set(tk.INSERT, "insert-2c")
 		return "break"
