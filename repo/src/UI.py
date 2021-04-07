@@ -12,8 +12,9 @@ class UI():
 	## 	Root window
 	root = None
 
-	##	StringVar variable holding the displayed expression
-	expr = None
+	##	tkinter.Text variable. The main display of the calculator.
+	#	Holds the displayed expression.
+	display = None
 
 	##	StringVar variable holding the displayed hint
 	hint = None
@@ -79,7 +80,9 @@ class UI():
 			"Delete": self.b_ac,
 			"Return": self.submit_expr,
 			"equal": self.submit_expr,
-			"KP_Enter": self.submit_expr
+			"KP_Enter": self.submit_expr,
+			"Left": lambda: 1,
+			"Right" : lambda: 1
 		}
 
 	##	Function called when the submit button is pressed.
@@ -188,16 +191,15 @@ class UI():
 		display_width = hint_width
 
 		# Creating display
-		global expr
-		expr = tk.StringVar()
-		#display = tk.Label(root,textvariable=expr,font=display_font,bg=display_color,fg=display_text_color)
-		#display.configure(wraplength=display_width)
-		#display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
-		
-
-
-
+		global display
+		display = tk.Text(root,width=25,height=5,font=display_font,bg=display_color,fg=display_text_color)
+		display.configure(insertwidth=3,insertbackground=display_text_color)
+		display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
+		display.bind("<Key>",self.key_pressed)
 		self.create_buttons(root)
+
+
+
 
 	## 	Function starts the mainloop and displays the window.
 	#	Must be called after the UI object has been created.
@@ -206,15 +208,14 @@ class UI():
 		global root
 		root = tk.Tk()
 
-		root.bind("<KeyPress>",self.key_pressed)
-
 		self.setup(root)
 
 		root.mainloop()
 
 	def key_pressed(self,evt):
 		if evt.keysym in key_handler:
-			key_handler[evt.keysym]()
+			return key_handler[evt.keysym]()
+		return "break"
 
 	##	Function sets the displayed hint.
 	#	@param new_hint New hint to be set.
@@ -230,26 +231,25 @@ class UI():
 	##	Function sets the displayed expression.
 	#	@param new_expr New expression to be set.
 	def set_expr(self,new_expr):
-		global expr
-		expr.set(new_expr)
+		global display
+		display.delete(1.0,"end")
+		display.insert(tk.INSERT,new_expr)
+
 
 	## Function returns the currently displayed expression.
 	def get_expr(self):
-		global expr
-		return expr.get()
+		global display
+		return display.get("1.0",tk.END)
 
 	## 	Function appends given string to the end of the displayed expression.
 	#	@param add String to be appended.
 	def append_expr(self,add):
-		expr = self.get_expr()
-		l=len(expr)
+		global display
+		display.insert(tk.INSERT,add)
 
-		# If error was displayed, the screen is cleared
-		if expr[:l] == "SyntaxError"[:l] or expr[:l] == "MathError"[:l]:
-			expr = ""
 
-		expr += add
-		self.set_expr(expr)
+
+
 
 	## Function sets the 'submit_callback' function.
 	#	@param foo Function to be assigned to 'submit_callback'
@@ -260,92 +260,122 @@ class UI():
 	## @section button on-click functions
 	def b_0(self):
 		self.append_expr("0")
+		return "break"
 
 	def b_1(self):
 		self.append_expr("1")
+		return "break"
 
 	def b_2(self):
 		self.append_expr("2")
+		return "break"
 
 	def b_3(self):
 		self.append_expr("3")
+		return "break"
 
 	def b_4(self):
 		self.append_expr("4")
+		return "break"
 
 	def b_5(self):
 		self.append_expr("5")
+		return "break"
 
 	def b_6(self):
 		self.append_expr("6")
+		return "break"
 
 	def b_7(self):
 		self.append_expr("7")
+		return "break"
 
 	def b_8(self):
 		self.append_expr("8")
+		return "break"
 
 	def b_9(self):
 		self.append_expr("9")
+		return "break"
 
 	def b_dot(self):
 		self.append_expr(".")
+		return "break"
 
 	def b_ans(self):
 		self.append_expr("Ans")
+		return "break"
 
 	def b_pi(self):
 		self.append_expr("π")
+		return "break"
 
 	def b_e(self):
 		self.append_expr("e")
+		return "break"
 
 	def b_sepp(self):
 		self.append_expr(",")
+		return "break"
 
 	def b_left_br(self):
 		self.append_expr("(")
+		return "break"
 
 	def b_right_br(self):
 		self.append_expr(")")
+		return "break"
 
 	def b_times(self):
 		self.append_expr("x")
+		return "break"
 
 	def b_div(self):
 		self.append_expr("/")
+		return "break"
 
 	def b_plus(self):
 		self.append_expr("+")
+		return "break"
 
 	def b_minus(self):
 		self.append_expr("-")
+		return "break"
 
 	def b_fact(self):
 		self.append_expr("!")
+		return "break"
 
 	def b_abs(self):
 		self.append_expr("|")
+		return "break"
 
 	def b_back(self):
 		expr = self.get_expr()
 		if expr[-3:] == "Ans":
 			expr = expr[0:-3]
-		else:
-			expr = expr[0:-1]
-		self.set_expr(expr)
+			self.set_expr(expr)
+			return "break"
+		return 1
+
+
 
 	def b_ac(self):
 		self.set_expr("")
+		return "break"
 
 	def b_mod(self):
 		self.append_expr("%")
+		return "break"
 
 	def b_pow(self):
 		self.append_expr("^")
+		return "break"
 
 	def b_sqrt(self):
 		self.append_expr("√")
+		return "break"
 
 	def b_nroot(self):
 		self.append_expr("√(")
+		return "break"
