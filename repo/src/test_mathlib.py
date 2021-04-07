@@ -114,15 +114,6 @@ class TestNRoot(unittest.TestCase):
 
 class TestPow(unittest.TestCase):
 
-    #Assigment defined natural exponents
-    def test_forbidden(self):
-        with self.assertRaises(ValueError):
-            mathlib.pow(1,-1)
-        with self.assertRaises(ValueError):
-            mathlib.pow(2,0.1)
-        with self.assertRaises(ValueError):
-            mathlib.pow(3,-1.5)
-    
     def test_pos_int(self):
         self.assertEqual(mathlib.pow(2,3),8)
         self.assertEqual(mathlib.pow(3,2),9)
@@ -223,11 +214,6 @@ class TestSubmitComplex(unittest.TestCase):
             mathlib.submit('√(0.5-28)')
         with self.assertRaises(ValueError):
             mathlib.submit('√(10-28,6)')
-        with self.assertRaises(ValueError):
-            mathlib.submit('(10-28,6)^-4') #negative power is forbiden
-        with self.assertRaises(ValueError):
-            mathlib.submit('(10-28,6)^0.5') #rational power is forbiden
-
 
 if __name__ == '__main__':
     unittest.main()
