@@ -190,9 +190,12 @@ class UI():
 		# Creating display
 		global expr
 		expr = tk.StringVar()
-		display = tk.Label(root,textvariable=expr,font=display_font,bg=display_color,fg=display_text_color)
-		display.configure(wraplength=display_width)
-		display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
+		#display = tk.Label(root,textvariable=expr,font=display_font,bg=display_color,fg=display_text_color)
+		#display.configure(wraplength=display_width)
+		#display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
+		
+
+
 
 		self.create_buttons(root)
 
