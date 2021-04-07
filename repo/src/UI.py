@@ -19,6 +19,9 @@ class UI():
 	##	StringVar variable holding the displayed hint
 	hint = None
 
+	##	Bool variable that inidcates whether the currently displayed expression is the result of prevoius calculation
+	displaying_result = None
+
 	## 	External function called after submit button is pressed.
 	#	Takes 1 argument representing the expression. Needs to be set using 'set_submit_callback()'.
 	submit_callback = None
@@ -31,6 +34,9 @@ class UI():
 	def __init__(self):
 		global submit_callback
 		submit_callback = None
+
+		global displaying_result
+		displaying_result = False
 
 		global key_handler
 		key_handler = {
@@ -88,11 +94,14 @@ class UI():
 	##	Function called when the submit button is pressed.
 	#	Calls the 'submit_callback()' function with the currently displayed expression.
 	def submit_expr(self):
+		global displaying_result
 		global submit_callback
 		if submit_callback is None:
 			print("submit_callback not defined!")
 		else:
 			submit_callback(self.get_expr())
+			displaying_result = True
+		return "break"
 
 	##	Function creates a button with given text on given position in the grid.
 	#	@param root Root window
@@ -188,7 +197,6 @@ class UI():
 
 		# Display properties
 		display_font = ("Ubuntu", 24)
-		display_width = hint_width
 
 		# Creating display
 		global display
@@ -198,6 +206,7 @@ class UI():
 		display.bind("<Key>",self.key_pressed)
 		self.create_buttons(root)
 
+		display.focus_set()
 
 
 
@@ -257,125 +266,175 @@ class UI():
 		global submit_callback
 		submit_callback = foo
 
+	def displaying_error(self):
+		return False
+
+	##	Function modifies the displayed result after evaluation.
+	#	If displayed expression is not a result, does nothing.
+	#	@param set_ans indicates whether the displayed result is to be replaced for "Ans"
+	#	@param always_clear indicates whether the result is to be cleared regardless of what it is.
+	def prepare_display(self,set_ans = True, always_clear = False):
+		global display
+		global displaying_result
+
+		if(not displaying_result):
+			return
+
+		displaying_result = False
+
+		if(self.displaying_error() or always_clear):
+			self.set_expr("")
+			return
+
+		if(set_ans):
+			self.set_expr("Ans")
+
+
+
 	## @section button on-click functions
 	def b_0(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("0")
 		return "break"
 
 	def b_1(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("1")
 		return "break"
 
 	def b_2(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("2")
 		return "break"
 
 	def b_3(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("3")
 		return "break"
 
 	def b_4(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("4")
 		return "break"
 
 	def b_5(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("5")
 		return "break"
 
 	def b_6(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("6")
 		return "break"
 
 	def b_7(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("7")
 		return "break"
 
 	def b_8(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("8")
 		return "break"
 
 	def b_9(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("9")
 		return "break"
 
 	def b_dot(self):
+		self.prepare_display(set_ans=False)
 		self.append_expr(".")
 		return "break"
 
 	def b_ans(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("Ans")
 		return "break"
 
 	def b_pi(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("π")
 		return "break"
 
 	def b_e(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("e")
 		return "break"
 
 	def b_sepp(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr(",")
 		return "break"
 
 	def b_left_br(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("(")
 		return "break"
 
 	def b_right_br(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr(")")
 		return "break"
 
 	def b_times(self):
+		self.prepare_display()
 		self.append_expr("x")
 		return "break"
 
 	def b_div(self):
+		self.prepare_display()
 		self.append_expr("/")
 		return "break"
 
 	def b_plus(self):
+		self.prepare_display()
 		self.append_expr("+")
 		return "break"
 
 	def b_minus(self):
+		self.prepare_display()
 		self.append_expr("-")
 		return "break"
 
 	def b_fact(self):
+		self.prepare_display()
 		self.append_expr("!")
 		return "break"
 
 	def b_abs(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("|")
 		return "break"
 
 	def b_back(self):
-		expr = self.get_expr()
-		if expr[-3:] == "Ans":
-			expr = expr[0:-3]
-			self.set_expr(expr)
-			return "break"
+		self.prepare_display(set_ans=False)
+		global display
+		last_3 = display.get("insert-3c","insert")
+		if(last_3 == "Ans"):
+			display.delete("insert-2c",tk.INSERT)
 		return 1
-
-
 
 	def b_ac(self):
 		self.set_expr("")
 		return "break"
 
 	def b_mod(self):
+		self.prepare_display()
 		self.append_expr("%")
 		return "break"
 
 	def b_pow(self):
+		self.prepare_display()
 		self.append_expr("^")
 		return "break"
 
 	def b_sqrt(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("√")
 		return "break"
 
 	def b_nroot(self):
+		self.prepare_display(always_clear=True)
 		self.append_expr("√(")
 		return "break"
