@@ -10,23 +10,24 @@ class TestFactorial(unittest.TestCase):
 
     #factorial is defined for non-negative ints only
     def test_forbidden(self):
-        with self.assertRaises(ValueError):
-            mathlib.factorial(-4)
-        with self.assertRaises(ValueError):
-            mathlib.factorial(0.1)
-        with self.assertRaises(ValueError):
-            mathlib.factorial(-0.68)
+        res = mathlib.submit('-4!')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('(-4)!')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('0.1!')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('-0.68!')
+        self.assertEqual(res,'Neplatný vstup')
     
     def test_unit(self):
-        self.assertEqual(mathlib.factorial(1),1)
-        self.assertEqual(mathlib.factorial(5),120)
-        self.assertEqual(mathlib.factorial(10),3628800)
-
-    def test_through_submit(self):
+        res = mathlib.submit('1!')
+        self.assertEqual(res,1)
         res = mathlib.submit('5!')
         self.assertEqual(res,120)
-        res = mathlib.submit('0!')
-        self.assertEqual(res,1)
+        res = mathlib.submit('-(5!)')
+        self.assertEqual(res,-120)
+        res = mathlib.submit('10!')
+        self.assertEqual(res,3628800)
 
 #Noncompulsory absotule (|x|) function
 class TestAbsolute(unittest.TestCase):
@@ -74,19 +75,18 @@ class TestModulo(unittest.TestCase):
         res = mathlib.submit('-114%5')
         self.assertEqual(res,-4)
         res = mathlib.submit('114%-5')
-        self.assertEqual(res,4)
-    
+        self.assertEqual(res,4) 
 
 class TestSquareRoot(unittest.TestCase):
 
     def test_forbidden(self):
         with self.assertRaises(ValueError):
-            mathlib.nroot(-4)
+            mathlib.sqrt(-4)
     
     def test_unit(self):
-        self.assertAlmostEqual(math.nroot(5),sqrt(5),8)
-        self.assertAlmostEqual(math.nroot(0.25),0.5,8)
-        self.assertEqual(mathlib.nroot(4),2)
+        self.assertAlmostEqual(mathlib.sqrt(5),sqrt(5),8)
+        self.assertAlmostEqual(mathlib.sqrt(0.25),0.5,8)
+        self.assertEqual(mathlib.sqrt(4),2)
 
     def test_through_submit(self):
         res = mathlib.submit('√(16)')
@@ -97,59 +97,53 @@ class TestSquareRoot(unittest.TestCase):
 class TestNRoot(unittest.TestCase):
 
     def test_forbidden(self):
-        with self.assertRaises(ValueError):
-            mathlib.nroot(-4,4)
-        with self.assertRaises(ValueError):
-            mathlib.nroot(4,0)
-        with self.assertRaises(ValueError):
-            mathlib.nroot(4,0.4)
+        res = mathlib.submit('√(-4,4)')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('√(4,0)')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('√(4,0.4)')
+        self.assertEqual(res,'Neplatný vstup')
 
     def test_unit(self):
-        self.assertEqual(mathlib.nroot(4,2),2)
-        self.assertEqual(mathlib.nroot(-8,3),-2)
-        self.assertAlmostEqual(mathlib.nroot(0.22667121,4),0.69,8)
-
-    def test_through_submit(self):
-        res=mathlib.submit('√(-8,3)')
+        res = mathlib.submit('√(4,2)')
+        self.assertEqual(res,2)
+        res = mathlib.submit('√(-8,3)')
         self.assertEqual(res,-2)
-        res = mathlib.submit('√(0.0065536,4)')
-        self.assertAlmostEqual(res,0.16,8)
-
+        res = mathlib.submit('√(0.22667121,4)')
+        self.assertAlmostEqual(res,0.69,8)
+        res = mathlib.submit('√(-0.32768,5)')
+        self.assertAlmostEqual(res,-0.8,8)
+        
 class TestPow(unittest.TestCase):
 
     def test_pos_int(self):
-        self.assertEqual(mathlib.pow(2,3),8)
-        self.assertEqual(mathlib.pow(3,2),9)
-        self.assertEqual(mathlib.pow(4,0),1)
+        res = mathlib.submit('2^3,5)')
+        self.assertEqual(res,8)
+        res = mathlib.submit('3^2')
+        self.assertEqual(res,9)
+        res = mathlib.submit('4^0')
+        self.assertEqual(res,1)
     
     def test_neg_int(self):
-        self.assertEqual(mathlib.pow(-2,3),-8)
-        self.assertEqual(mathlib.pow(-2,2),4)
-        self.assertEqual(mathlib.pow(-5,0),1)
+        res = mathlib.submit('2^3')
+        self.assertEqual(res,-8)
+        res = mathlib.submit('-2^2')
+        self.assertEqual(res,4)
+        res = mathlib.submit('-5^0')
+        self.assertEqual(res,1)
     
     def test_pos_double(self):
-        self.assertAlmostEqual(mathlib.pow(0.2,3),0.008,8)
-        self.assertAlmostEqual(mathlib.pow(0.01,4),float(1e-8),8)
-        self.assertAlmostEqual(mathlib.pow(0.2,0),1)
+        res = mathlib.submit('0.2^3')
+        self.assertAlmostEqual(res,0.008,8)
+        res = mathlib.submit('0.01^4')
+        self.assertAlmostEqual(res,float(1e-8),8)
+        res = mathlib.submit('0.2^0')
+        self.assertAlmostEqual(res,1)
 
     def test_neg_double(self):
         self.assertAlmostEqual(mathlib.pow(-0.2,3),-0.008,8)
         self.assertAlmostEqual(mathlib.pow(-0.01,4),float(1e-8),8)
         self.assertAlmostEqual(mathlib.pow(-0.2,0),1,8)
-
-    def test_through_submit(self):
-        res = mathlib.submit('(-11.1)^2')
-        self.assertAlmostEqual(res,123.21,8)
-        res = mathlib.submit('(-2.5)^3')
-        self.assertAlmostEqual(res,-15.625,8)
-        res = mathlib.submit('(2.5)^3')
-        self.assertAlmostEqual(res,15.625,8)
-        res = mathlib.submit('(-2)^3')
-        self.assertEqual(res,-8)
-        res = mathlib.submit('(-2)^2')
-        self.assertEqual(res,4)
-        res = mathlib.submit('(4)^2')
-        self.assertEqual(res,16)
 
 class TestSubmitComplex(unittest.TestCase):
 
