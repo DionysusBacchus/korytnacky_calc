@@ -84,7 +84,7 @@ class TestSquareRoot(unittest.TestCase):
             mathlib.sqrt(-4)
     
     def test_unit(self):
-        self.assertAlmostEqual(mathlib.sqrt(5),sqrt(5),8)
+        self.assertAlmostEqual(mathlib.sqrt(5),2.23606798,8)
         self.assertAlmostEqual(mathlib.sqrt(0.25),0.5,8)
         self.assertEqual(mathlib.sqrt(4),2)
 
@@ -117,7 +117,7 @@ class TestNRoot(unittest.TestCase):
 class TestPow(unittest.TestCase):
 
     def test_pos_int(self):
-        res = mathlib.submit('2^3)')
+        res = mathlib.submit('2^3')
         self.assertEqual(res,8)
         res = mathlib.submit('3^2')
         self.assertEqual(res,9)
@@ -199,6 +199,7 @@ class TestSubmitComplex(unittest.TestCase):
         res = mathlib.submit('(4.091+0.009)^2-√(1.44)*5+0.12345678')
         self.assertAlmostEqual(res,10.93345678,8)
 
+    #siki repair factorial pls <3
     def test_forbidden(self):
         res = mathlib.submit('12/0')
         self.assertEqual(res,'Nulou se nedá dělit')
