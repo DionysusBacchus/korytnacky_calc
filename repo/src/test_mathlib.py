@@ -13,7 +13,7 @@ class TestFactorial(unittest.TestCase):
         res = mathlib.submit('-4!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('(-4)!')
-        self.assertEqual(res,'Neplatný vstup')
+        self.assertEqual(res,'Chyba syntaxe')
         res = mathlib.submit('0.1!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('-0.68!')
@@ -73,9 +73,9 @@ class TestModulo(unittest.TestCase):
 
     def test_mixed(self):
         res = mathlib.submit('-114%5')
-        self.assertEqual(res,-4)
+        self.assertEqual(res,1)
         res = mathlib.submit('114%-5')
-        self.assertEqual(res,4) 
+        self.assertEqual(res,-1) 
 
 class TestSquareRoot(unittest.TestCase):
 
@@ -117,7 +117,7 @@ class TestNRoot(unittest.TestCase):
 class TestPow(unittest.TestCase):
 
     def test_pos_int(self):
-        res = mathlib.submit('2^3,5)')
+        res = mathlib.submit('2^3)')
         self.assertEqual(res,8)
         res = mathlib.submit('3^2')
         self.assertEqual(res,9)
@@ -125,11 +125,11 @@ class TestPow(unittest.TestCase):
         self.assertEqual(res,1)
     
     def test_neg_int(self):
-        res = mathlib.submit('2^3')
+        res = mathlib.submit('(-2)^3')
         self.assertEqual(res,-8)
-        res = mathlib.submit('-2^2')
+        res = mathlib.submit('(-2)^2')
         self.assertEqual(res,4)
-        res = mathlib.submit('-5^0')
+        res = mathlib.submit('(-5)^0')
         self.assertEqual(res,1)
     
     def test_pos_double(self):
@@ -141,11 +141,11 @@ class TestPow(unittest.TestCase):
         self.assertAlmostEqual(res,1)
 
     def test_neg_double(self):
-        res = mathlib.submit('-0.2^3')
+        res = mathlib.submit('(-0.2)^3')
         self.assertAlmostEqual(res,-0.008,8)
-        res = mathlib.submit('-0.01^4')
+        res = mathlib.submit('(-0.01)^4')
         self.assertAlmostEqual(res,float(1e-8),8)
-        res = mathlib.submit('-0.2^0')
+        res = mathlib.submit('(-0.2)^0')
         self.assertAlmostEqual(res,1,8)
 
 class TestSubmitComplex(unittest.TestCase):
@@ -197,7 +197,7 @@ class TestSubmitComplex(unittest.TestCase):
         res = mathlib.submit('(4.091+0.009)^2-1.5*4')
         self.assertAlmostEqual(res,10.81,8)
         res = mathlib.submit('(4.091+0.009)^2-√(1.44)*5+0.12345678')
-        self.assertAlmostEqual(res,10.933456789,8)
+        self.assertAlmostEqual(res,10.93345678,8)
 
     def test_forbidden(self):
         res = mathlib.submit('12/0')
@@ -205,7 +205,7 @@ class TestSubmitComplex(unittest.TestCase):
         res = mathlib.submit('1.15/0')
         self.assertEqual(res,'Nulou se nedá dělit')
         res = mathlib.submit('(14-28)!')
-        self.assertEqual(res,'Neplatný vstup')
+        self.assertEqual(res,'Chyba syntaxe')
         res = mathlib.submit('(0.18724)!')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('√(10-28)')
