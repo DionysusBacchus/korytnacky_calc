@@ -20,7 +20,7 @@ class UI():
 	hint = None
 
 	##	Bool variable that inidcates whether the currently displayed expression is the result of prevoius calculation
-	displaying_result = None
+	displaying_result = False
 
 	## 	External function called after submit button is pressed.
 	#	Takes 1 argument representing the expression. Needs to be set using 'set_submit_callback()'.
@@ -30,16 +30,11 @@ class UI():
 	#	Initialized in the constructor.
 	key_handler = None
 
+	error_messages = "Nulou se nedá dělit", "Neplatný vstup", "Chyba syntaxe"
+
 	##	Constructor only initializes global variables. To create the window use 'start_loop()'.
 	def __init__(self):
-		global submit_callback
-		submit_callback = None
-
-		global displaying_result
-		displaying_result = False
-
-		global key_handler
-		key_handler = {
+		self.key_handler = {
 			"0": self.b_0,
 			"1": self.b_1,
 			"2": self.b_2,
@@ -94,13 +89,11 @@ class UI():
 	##	Function called when the submit button is pressed.
 	#	Calls the 'submit_callback()' function with the currently displayed expression.
 	def submit_expr(self):
-		global displaying_result
-		global submit_callback
-		if submit_callback is None:
+		if self.submit_callback is None:
 			print("submit_callback not defined!")
 		else:
-			submit_callback(self.get_expr())
-			displaying_result = True
+			self.submit_callback(self.get_expr())
+			self.displaying_result = True
 		return "break"
 
 	##	Function creates a button with given text on given position in the grid.
@@ -189,9 +182,8 @@ class UI():
 		hint_width = 500
 
 		# Creating hint
-		global hint
-		hint = tk.StringVar()
-		hint_display = tk.Label(root,textvariable=hint,font=hint_font,bg=hint_color,fg=hint_text_color,width=36,wraplength=hint_width,anchor="w")
+		self.hint = tk.StringVar()
+		hint_display = tk.Label(root,textvariable=self.hint,font=hint_font,bg=hint_color,fg=hint_text_color,width=36,wraplength=hint_width,anchor="w")
 		hint_display.grid(row=0,column=0,columnspan=7,pady=10,padx=10)
 
 
@@ -199,14 +191,13 @@ class UI():
 		display_font = ("Ubuntu", 24)
 
 		# Creating display
-		global display
-		display = tk.Text(root,width=25,height=5,font=display_font,bg=display_color,fg=display_text_color)
-		display.configure(insertwidth=3,insertbackground=display_text_color,highlightthickness=0)
-		display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
-		display.bind("<Key>",self.key_pressed)
+		self.display = tk.Text(root,width=25,height=5,font=display_font,bg=display_color,fg=display_text_color)
+		self.display.configure(insertwidth=3,insertbackground=display_text_color,highlightthickness=0)
+		self.display.grid(columnspan=7,rowspan=2,column=0,row=1,pady=40)
+		self.display.bind("<Key>",self.key_pressed)
 		self.create_buttons(root)
 
-		display.focus_set()
+		self.display.focus_set()
 
 
 
@@ -214,77 +205,90 @@ class UI():
 	#	Must be called after the UI object has been created.
 	#	Function loops until the window is closed.
 	def start_loop(self):
-		global root
-		root = tk.Tk()
+		self.root = tk.Tk()
 
-		self.setup(root)
+		self.setup(self.root)
 
-		root.mainloop()
+		self.root.mainloop()
 
 	def key_pressed(self,evt):
-		if evt.keysym in key_handler:
-			return key_handler[evt.keysym]()
+		if evt.keysym in self.key_handler:
+			return self.key_handler[evt.keysym]()
 		return "break"
 
 	##	Function sets the displayed hint.
 	#	@param new_hint New hint to be set.
 	def set_hint(self,new_hint):
-		global hint
-		hint.set(new_hint)
+		self.hint.set(new_hint)
 
 	## 	Function sets the displayed hint to "".
 	def clear_hint(self):
-		global hint
-		hint.set("")
+		self.hint.set("")
 
 	##	Function sets the displayed expression.
 	#	@param new_expr New expression to be set.
 	def set_expr(self,new_expr):
-		global display
-		display.delete(1.0,"end")
-		display.insert(tk.INSERT,new_expr)
+		self.display.delete(1.0,"end")
+		self.display.insert(tk.INSERT,new_expr)
 
 
 	## Function returns the currently displayed expression.
 	def get_expr(self):
-		global display
-		return display.get("1.0",tk.END)
+		return self.display.get("1.0",tk.END)
 
 	## 	Function appends given string to the end of the displayed expression.
 	#	@param add String to be appended.
 	def append_expr(self,add):
-		global display
-		display.insert(tk.INSERT,add)
+		self.display.insert(tk.INSERT,add)
 
 
 
 
 
-	## Function sets the 'submit_callback' function.
+	## 	Function sets the 'submit_callback' function.
 	#	@param foo Function to be assigned to 'submit_callback'
 	def set_submit_callback(self,foo):
-		global submit_callback
-		submit_callback = foo
+		self.submit_callback = foo
 
+	#	Function determines whither the displayed expression is an error message.
 	def displaying_error(self):
+		if self.get_expr()[:-1] in self.error_messages:
+			return True
 		return False
 
-	##	Function modifies the displayed result after evaluation.
+	##	Function modifies the displayed expression after evaluation according to parameters.
 	#	If displayed expression is not a result, does nothing.
-	#	@param set_ans indicates whether the displayed result is to be replaced for "Ans"
+	#	By default, replaces result with "Ans".
+	#	@param set_ans indicates whether the displayed result is to be replaced for "Ans" or "".
+	#	@param insert_only indicates that the displayed result is to be cleared UNLESS the cursor is not at the end, in
+	#		which case the result is left unchanged.
+	#	@param insert_or_ans indicates that the displayed result is to be replaced for "Ans" UNLESS the cursor is not
+	#		at the end, in which case the result is left unchanged.
 	#	@param always_clear indicates whether the result is to be cleared regardless of what it is.
-	def prepare_display(self,set_ans = True, always_clear = False):
-		global display
-		global displaying_result
-
-		if(not displaying_result):
+	def prepare_display(self,set_ans = True, insert_only = False, insert_or_ans = False, always_clear = False):
+		if(not self.displaying_result):
 			return
 
-		displaying_result = False
+		self.displaying_result = False
 
-		if(self.displaying_error() or always_clear):
+		if (self.displaying_error() or always_clear):
 			self.set_expr("")
 			return
+
+
+		if(insert_or_ans):
+			if (self.display.index(tk.INSERT) == self.display.index("end-1c")):
+				# Cursor is at the end
+				self.set_expr("Ans")
+			return
+
+
+		if(insert_only):
+			if(self.display.index(tk.INSERT) == self.display.index("end-1c")):
+				# Cursor is at the end
+				self.set_expr("")
+			return
+
 
 		if(set_ans):
 			self.set_expr("Ans")
@@ -293,52 +297,52 @@ class UI():
 
 	## @section button on-click functions
 	def b_0(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("0")
 		return "break"
 
 	def b_1(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("1")
 		return "break"
 
 	def b_2(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("2")
 		return "break"
 
 	def b_3(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("3")
 		return "break"
 
 	def b_4(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("4")
 		return "break"
 
 	def b_5(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("5")
 		return "break"
 
 	def b_6(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("6")
 		return "break"
 
 	def b_7(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("7")
 		return "break"
 
 	def b_8(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("8")
 		return "break"
 
 	def b_9(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("9")
 		return "break"
 
@@ -363,37 +367,37 @@ class UI():
 		return "break"
 
 	def b_sepp(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr(",")
 		return "break"
 
 	def b_left_br(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr("(")
 		return "break"
 
 	def b_right_br(self):
-		self.prepare_display(always_clear=True)
+		self.prepare_display(insert_only=True)
 		self.append_expr(")")
 		return "break"
 
 	def b_times(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("x")
 		return "break"
 
 	def b_div(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("/")
 		return "break"
 
 	def b_plus(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("+")
 		return "break"
 
 	def b_minus(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("-")
 		return "break"
 
@@ -405,18 +409,16 @@ class UI():
 	def b_abs(self):
 		self.prepare_display(always_clear=True)
 		self.append_expr("||")
-		global display
-		display.mark_set(tk.INSERT, "insert-1c")
+		self.display.mark_set(tk.INSERT, "insert-1c")
 		return "break"
 
 	def b_back(self):
 		self.prepare_display(set_ans=False)
-		global display
-		last_3 = display.get("insert-3c","insert")
+		last_3 = self.display.get("insert-3c","insert")
 		if(last_3 == "Ans"):
-			display.delete("insert-3c",tk.INSERT)
+			self.display.delete("insert-3c",tk.INSERT)
 		else:
-			display.delete("insert-1c")
+			self.display.delete("insert-1c")
 		return "break"
 
 	def b_ac(self):
@@ -424,27 +426,24 @@ class UI():
 		return "break"
 
 	def b_mod(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("%")
 		return "break"
 
 	def b_pow(self):
-		self.prepare_display()
+		self.prepare_display(insert_or_ans=True)
 		self.append_expr("^()")
-		global display
-		display.mark_set(tk.INSERT, "insert-1c")
+		self.display.mark_set(tk.INSERT, "insert-1c")
 		return "break"
 
 	def b_sqrt(self):
 		self.prepare_display(always_clear=True)
 		self.append_expr("√()")
-		global display
-		display.mark_set(tk.INSERT,"insert-1c")
+		self.display.mark_set(tk.INSERT,"insert-1c")
 		return "break"
 
 	def b_nroot(self):
 		self.prepare_display(always_clear=True)
 		self.append_expr("√(,)")
-		global display
-		display.mark_set(tk.INSERT, "insert-2c")
+		self.display.mark_set(tk.INSERT, "insert-2c")
 		return "break"
