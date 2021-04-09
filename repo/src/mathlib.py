@@ -122,6 +122,4 @@ def submit(string):
         #print (Ans)
         return float(answer)
 
-        
-
 
