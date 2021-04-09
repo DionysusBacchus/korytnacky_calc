@@ -44,7 +44,7 @@ class TestLog(unittest.TestCase):
         y = mathlib.submit('2*ln(3)')
         self.assertEqual(x,y)
 
-        def test_forbidden(self):
+    def test_forbidden(self):
         res = mathlib.submit('ln(-1)')
         self.assertEqual(res,'Neplatný vstup')
         res = mathlib.submit('ln(0)')
