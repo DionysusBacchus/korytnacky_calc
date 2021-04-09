@@ -28,9 +28,11 @@ class UI():
 
 	##	Dictionary mapping key symbols to functions. Used in 'key_pressed()'.
 	#	Initialized in the constructor.
+	#	Only keys specified in key_handler will be registered.
 	key_handler = None
 
-	error_messages = "Nulou se nedá dělit", "Neplatný vstup", "Chyba syntaxe"
+	#	Characters holding some letter that can only appear on screen if error is displayed.
+	forbidden_characters = "abcdfghijklmopqrtuvxyz"
 
 	##	Constructor only initializes global variables. To create the window use 'start_loop()'.
 	def __init__(self):
@@ -62,6 +64,8 @@ class UI():
 			"KP_Decimal": self.b_dot,
 			"a": self.b_ans,
 			"A": self.b_ans,
+			"l": self.b_ln,
+			"L": self.b_ln,
 			"parenleft": self.b_left_br,
 			"parenright": self.b_right_br,
 			"x": self.b_times,
@@ -82,6 +86,7 @@ class UI():
 			"Return": self.submit_expr,
 			"equal": self.submit_expr,
 			"KP_Enter": self.submit_expr,
+			#	Keys that are to be handled by self.display.
 			"Left": lambda: 1,
 			"Right" : lambda: 1,
 			"Up": lambda: 1,
@@ -154,12 +159,13 @@ class UI():
 		self.create_button(root, "π", 3, 0,font=font,command=self.b_pi,hint_text="Pí:     3.141592653589793", bg=color_B)
 		self.create_button(root, "e", 3, 1,font=font,command=self.b_e,hint_text="Eulerovo číslo:     2.718281828459045", bg=color_B)
 
-		self.create_button(root,"%" ,6,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
-		self.create_button(root, ",", 5, 1,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
-		self.create_button(root,"^" ,4,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_A)
 		self.create_button(root,"√" ,4,0,font=font,command=self.b_sqrt,hint_text="Odmocnina:     √81", bg=color_A)
+		self.create_button(root,"^" ,4,1,font=font,command=self.b_pow,hint_text="Umocnění:     2^e", bg=color_A)
 		self.create_button(root,"√(x,n)",5,0,font=font,command=self.b_nroot,hint_text="Odmocnina n-tého řádu z x  √(x,n):     √(27,3)", bg=color_A)
+		self.create_button(root, ",", 5, 1,font=font,command=self.b_sepp,hint_text="Oddělovač argumentú pro √(x,n)", bg=color_B)
+		self.create_button(root,"%" ,6,0,font=font,command=self.b_mod,hint_text="Modulo:     8%3", bg=color_B)
 		self.create_button(root,"!",6,1,font=font,command=self.b_fact,hint_text="Faktoriál:     5!", bg=color_B)
+		self.create_button(root,"ln" ,7,0,font=font,command=self.b_ln,hint_text="Přirozený logaritmus:     ln(2)", bg=color_B)
 		self.create_button(root,"|",7,1,font=font,command=self.b_abs,hint_text="Absolutní hodnota:     |-8|", bg=color_B)
 
 		self.create_button(root,"<-",3,5,font=font,command=self.b_back,hint_text="Smazat poslední znak",bg=color_C)
@@ -262,8 +268,10 @@ class UI():
 
 	#	Function determines whither the displayed expression is an error message.
 	def displaying_error(self):
-		if self.get_expr()[:-1] in self.error_messages:
-			return True
+		expr = self.get_expr()
+		for c in self.forbidden_characters:
+			if c in expr:
+				return True
 		return False
 
 	##	Function modifies the displayed expression after evaluation according to parameters.
@@ -305,7 +313,8 @@ class UI():
 
 
 
-	## @section button on-click functions
+	## 	@section button on-click functions.
+	#	Functions return "break" if the default reaction to button press by self.display is to be ignored.
 	def b_0(self):
 		self.prepare_display(insert_only=True)
 		self.append_expr("0")
@@ -425,8 +434,11 @@ class UI():
 	def b_back(self):
 		self.prepare_display(set_ans=False)
 		last_3 = self.display.get("insert-3c","insert")
+		last_2 = self.display.get("insert-2c","insert")
 		if(last_3 == "Ans"):
 			self.display.delete("insert-3c",tk.INSERT)
+		elif(last_2 == "ln"):
+			self.display.delete("insert-2c",tk.INSERT)
 		else:
 			self.display.delete("insert-1c")
 		return "break"
@@ -456,4 +468,10 @@ class UI():
 		self.prepare_display(always_clear=True)
 		self.append_expr("√(,)")
 		self.display.mark_set(tk.INSERT, "insert-2c")
+		return "break"
+
+	def b_ln(self):
+		self.prepare_display(always_clear=True)
+		self.append_expr("ln()")
+		self.display.mark_set(tk.INSERT,"insert-1c")
 		return "break"
