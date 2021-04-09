@@ -6,3 +6,5 @@
 
 2.04  Setkání se neuskutečnilo kvůli odevzdaní projektu z jiného předmětu (neměli jsme čas). 
       Moc se nepovedlo dodržet strukturu TDD, během psání samotného kodu kalkulačky byly zjištěny chyby v testech, takže byla potřeba je opravit, a       ta oprava už byla ovlivněná existujícím programem. 
+      
+9.04 Rozhodli jsme se přídat novou funkci, takže musíme opravit matematickou knihovnu, testy, a UI. 
