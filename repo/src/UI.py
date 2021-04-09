@@ -83,7 +83,17 @@ class UI():
 			"equal": self.submit_expr,
 			"KP_Enter": self.submit_expr,
 			"Left": lambda: 1,
-			"Right" : lambda: 1
+			"Right" : lambda: 1,
+			"Up": lambda: 1,
+			"Down": lambda: 1,
+			"End": lambda: 1,
+			"Home": lambda: 1,
+			"KP_Left": lambda: 1,
+			"KP_Right": lambda: 1,
+			"KP_Up": lambda: 1,
+			"KP_Down": lambda: 1,
+			"KP_End": lambda: 1,
+			"KP_Home": lambda: 1
 		}
 
 	##	Function called when the submit button is pressed.
@@ -167,7 +177,7 @@ class UI():
 	# 	Called from 'start_loop'.
 	#	@param root The root window.
 	def setup(self,root):
-		root.title('kalkulačka')
+		root.title('Korytnačí kalkulačka')
 		root.resizable(False, False)
 
 		# Color setup. Button colors are in 'create_buttons()'
