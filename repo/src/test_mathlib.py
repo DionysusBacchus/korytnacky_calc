@@ -29,6 +29,27 @@ class TestFactorial(unittest.TestCase):
         res = mathlib.submit('10!')
         self.assertEqual(res,3628800)
 
+#Noncompulsory natural logarithm function
+class TestLog(unittest.TestCase):
+    def test_props(self):
+        res = mathlib.submit('ln(1)')
+        self.assertEqual(res,0)
+        res = mathlib.submit('ln(e)')
+        self.assertEqual(res,1)
+        xy = mathlib.submit('ln(15)')
+        x = mathlib.submit('ln(3)')
+        y = mathlib.submit('ln(5)')
+        self.assertEqual(xy,x+y)
+        x = mathlib.submit('ln(3^(2))')
+        y = mathlib.submit('2*ln(3)')
+        self.assertEqual(x,y)
+
+        def test_forbidden(self):
+        res = mathlib.submit('ln(-1)')
+        self.assertEqual(res,'Neplatný vstup')
+        res = mathlib.submit('ln(0)')
+        self.assertEqual(res,'Neplatný vstup')
+
 #Noncompulsory absotule (|x|) function
 class TestAbsolute(unittest.TestCase):
     
@@ -163,6 +184,10 @@ class TestSubmitComplex(unittest.TestCase):
         res = mathlib.submit('|4+5)*2)')
         self.assertEqual(res,'Chyba syntaxe')
         res = mathlib.submit('|(4+5)|*2|')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('ln(9')
+        self.assertEqual(res,'Chyba syntaxe')
+        res = mathlib.submit('ln8)')
         self.assertEqual(res,'Chyba syntaxe')
     
     def test_basics_int(self):
