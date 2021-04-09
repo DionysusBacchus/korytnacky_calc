@@ -22,7 +22,6 @@ def set_set_expr(foo):
 ##  Function which handles error in case of infite calucluation
 def timeout_handler(num, stack):
     print ("Recived SIGALRM")
-    set_expr("Příliš komplikované")
     raise Exception("Takes too long to calculate")
     
 
@@ -70,6 +69,8 @@ def convert(string):
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     if "sqrt" in string:
         string = re.sub(r'sqrt\(([\w]+)\)|sqrt(([\w]+))',r'sqrt(\1\2)',string)
+    if "ln" in string:
+        string = re.sub(r'ln\(([\w]+)\)|ln(([\w]+))',r'log(\1\2)',string)
     return string
 
 
@@ -111,8 +112,9 @@ def submit(string):
         return "Neplatný vstup"
     except OverflowError:
         set_expr("Výsledek mimo maximálnej rozsah")
-    else:
-        
+    except Exception:
+        set_expr("Příliš komplikované")
+    else:        
         answer = ('%.15f' % float(answer)).rstrip('0').rstrip('.')
         #print (answer)
         set_expr(answer)
