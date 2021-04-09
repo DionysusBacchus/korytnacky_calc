@@ -70,6 +70,8 @@ def convert(string):
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     if "sqrt" in string:
         string = re.sub(r'sqrt\(([\w]+)\)|sqrt(([\w]+))',r'sqrt(\1\2)',string)
+    if "ln" in string:
+        string = re.sub(r'ln(.+)',r'log(\1)',string)
     return string
 
 
