@@ -6,7 +6,7 @@ clean:
 pack:
 	#TODO	
 test:
-	test_mathlib.py
+	python3 test_mathlib.py
 run:
 	#ma to spoustet program
 	python3 main.py
