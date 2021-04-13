@@ -183,7 +183,7 @@ class UI():
 	# 	Called from 'start_loop'.
 	#	@param root The root window.
 	def setup(self,root):
-		root.title('kalkulačka')
+		root.title('Korytnačí kalkulačka')
 		root.resizable(False, False)
 
 		# Color setup. Button colors are in 'create_buttons()'
