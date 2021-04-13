@@ -1,12 +1,17 @@
 #Project Makefile
 all:
 	python3 main.py
+	python3 profiling.py
+clean:
+pack:
+	#TODO	
 test:
-	python3 mathlib.py
+	test_mathlib.py
+run:
+	#ma to spoustet program
+	python3 main.py
+doc: 
+	#dokumentace
+profile:
 	python3 profiling.py
-math:
-	python3 mathlib.py
-prof:
-	python3 profiling.py
-UI:
-	python3 UI_template.py
+
