@@ -28,7 +28,7 @@ for line in sys.stdin:
     line = compact_spaces(line).split(" ")
 
     for num in line:
-        data.append( int(num) )
+        data.append( float(num) )
 
 
 #   constants used in calculation
