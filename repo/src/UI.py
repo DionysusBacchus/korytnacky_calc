@@ -1,5 +1,6 @@
 ##
 # @file UI.py
+# @author Martin Pavella xpavel39
 #
 
 import tkinter as tk
@@ -86,19 +87,18 @@ class UI():
 			"Return": self.submit_expr,
 			"equal": self.submit_expr,
 			"KP_Enter": self.submit_expr,
-			#	Keys that are to be handled by self.display.
-			"Left": lambda: 1,
-			"Right" : lambda: 1,
-			"Up": lambda: 1,
-			"Down": lambda: 1,
-			"End": lambda: 1,
-			"Home": lambda: 1,
-			"KP_Left": lambda: 1,
-			"KP_Right": lambda: 1,
-			"KP_Up": lambda: 1,
-			"KP_Down": lambda: 1,
-			"KP_End": lambda: 1,
-			"KP_Home": lambda: 1
+			"Left": self.key_left,
+			"Right" : self.key_right,
+			"Up": self.key_up,
+			"Down": self.key_down,
+			"End": self.key_end,
+			"Home": self.key_home,
+			"KP_Left": self.key_left,
+			"KP_Right": self.key_right,
+			"KP_Up": self.key_up,
+			"KP_Down": self.key_down,
+			"KP_End": self.key_end,
+			"KP_Home": self.key_home
 		}
 
 	##	Function called when the submit button is pressed.
@@ -310,6 +310,32 @@ class UI():
 
 		if(set_ans):
 			self.set_expr("Ans")
+			
+	##	@section display movement functions.
+	#	Functions return "break" if the default reaction to button press by self.display is to be ignored.
+	def key_left(self):
+		self.display.mark_set(tk.INSERT, "insert-1c")
+		return "break"
+	
+	def key_right(self):
+		self.display.mark_set(tk.INSERT, "insert+1c")
+		return "break"
+	
+	def key_up(self):
+		self.display.mark_set(tk.INSERT, "insert-25c")
+		return "break"
+		
+	def key_down(self):
+		self.display.mark_set(tk.INSERT, "insert+25c")
+		return "break"
+		
+	def key_home(self):
+		self.display.mark_set(tk.INSERT, "1.0")
+		return "break"
+		
+	def key_end(self):
+		self.display.mark_set(tk.INSERT, tk.END)
+		return "break"
 
 
 
