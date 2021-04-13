@@ -63,7 +63,7 @@ def convert(string):
     string = string.replace("π","3.141592653589793")
     string = string.replace("Ans",str(Ans))
     if "!" in string:
-        string = re.sub(r'([0-9]+)!|([0-9]+\.[0-9]+)!|\((-[0-9]+)\)!|\(([0-9]+\.[0-9]+)\)!',r'factorial(\1\2)',string)
+        string = re.sub(r'([0-9]+)!|([0-9]+\.[0-9]+)!|\((.+)\)!|\((.+)\)!|(^-[0-9]+)!|(^-[0-9]+\.[0-9]+)!',r'factorial(\1\2\3\4\5\6)',string)
     if "|" in string:
         string = re.sub(r'\|\((.+?)\)\||\|(.+?)\|',r'abs(\1\2)',string)
     if "sqrt" in string:
@@ -88,9 +88,9 @@ def submit(string):
         signal.alarm(8)
         try:
             answer = 0
-            print (string)
+            #print (string)
             answer = eval(string,globals())
-            print (answer)
+            #print (answer)
         finally:
             signal.alarm(0)
     
