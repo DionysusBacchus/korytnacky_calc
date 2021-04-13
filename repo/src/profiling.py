@@ -35,6 +35,7 @@ for line in sys.stdin:
 data_len = len(data)
 data_average = sum(data) / data_len
 
+#   calculation
 sum = 0;
 
 for x in data:
@@ -42,6 +43,6 @@ for x in data:
 
 res = sum - data_len * (data_average**2)
 res = res * (1 / (data_len - 1))
-res = sum ** 0.5
+res = res ** 0.5
 
 print(res)
