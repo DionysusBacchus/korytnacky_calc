@@ -1,10 +1,6 @@
-##@package
-#\file math.py
-#\brief Math package for calculator
-#This package contains evaluation and calculating of string input from UI 
-#
-
-##  
+##
+# @file mathlib.py
+# @author Jakub Sikula
 #
 
 from math import *
@@ -12,19 +8,29 @@ import re
 import UI 
 import signal
 
+##
+# 	@biref library which contains funcitons that evaluate and calculate math problems
+#	Evaluation and calculation is based on calling of sumbit()
+
+
 
 ## Function for comunication with other scripts
+#   @param  foo     to do
 set_expr = None
 def set_set_expr(foo):
     global set_expr
     set_expr = foo
 
 ##  Function which handles error in case of infite calucluation
+#   @param  num     to do
+#   @param  stack   to do
 def timeout_handler(num, stack):
     raise Exception("Takes too long to calculate")
     
 
-##  Constructor of root function 
+##  Function for root function
+#   @param  x   root of number
+#   @param  n   nth root
 def sqrt(x,n=2):
     if x == 0:
         return 0
@@ -50,10 +56,12 @@ def sqrt(x,n=2):
         raise ValueError("Answer is complex number")
     else:
         return ans
+
 ##  Variable witch holds previous answer
 Ans = 0
 
-##  Function which convert input string and returns edited string usable in evaluation
+##  Function returns converted string to correct form
+#   @param  string  data to be converted 
 def convert(string):
     global Ans
     string = string.replace("√" ,"sqrt")
@@ -75,7 +83,8 @@ def convert(string):
 
 
 
-##  Function which is used to submit and convert
+##  Function returns calculated data in string and sets data to display
+#   @param  string  data to evaluate and calculate
 def submit(string):
     global Ans
     #print ("Previous ans= " + str(Ans))
