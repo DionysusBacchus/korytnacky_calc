@@ -1,8 +1,11 @@
 #Project Makefile
+.PHONY all clean pack test run doc profile
+	
 all:
 	python3 main.py
 	python3 profiling.py
 clean:
+
 pack:
 	#TODO	
 test:
@@ -10,8 +13,9 @@ test:
 run:
 	#ma to spoustet program
 	python3 main.py
-doc: 
-	#dokumentace
+doc:
+	doxygen Doxyfile
+	
 profile:
 	python3 profiling.py
 
