@@ -3,6 +3,7 @@
 #   @author Martin Pavella xpavel39
 
 import sys
+import mathlib
 
 ##  Function replaces runs of multiple space ' ' characters with exactly 1.
 #   @param str string with source data
@@ -33,13 +34,10 @@ for line in sys.stdin:
 
 #   constants used in calculation
 data_len = len(data)
-data_average = sum(data) / data_len
+data_average = mathlib.avg(data)
 
 #   calculation
-sum = 0;
-
-for x in data:
-    sum += (x**2)
+sum = mathlib.sum_squares(data)
 
 res = sum - data_len * (data_average**2)
 res = res * (1 / (data_len - 1))

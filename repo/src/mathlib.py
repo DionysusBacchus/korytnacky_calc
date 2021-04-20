@@ -122,4 +122,15 @@ def submit(string):
         #print (Ans)
         return float(answer)
 
+##  Function returns the average vale of given data
+#   @param  l   list holding the data
+def avg(l):
+    return sum(l) / len(l)
 
+##  Function sums the squares of all given values
+#   @param  l   list holding the data
+def sum_squares(l):
+    sum = 0;
+    for x in l:
+        sum += (x ** 2)
+    return sum
