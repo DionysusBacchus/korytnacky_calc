@@ -9,7 +9,7 @@ import UI
 import signal
 
 ##
-# 	@biref library which contains funcitons that evaluate and calculate math problems
+# 	@brief library which contains funcitons that evaluate and calculate math problems
 #	Evaluation and calculation is based on calling of sumbit()
 
 
