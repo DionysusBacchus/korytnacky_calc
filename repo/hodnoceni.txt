@@ -1,5 +1,5 @@
-xkhrys00 * ()
-xlebed12 * ()
-xsikul15 * ()
-xpavel39 * ()
+xkhrys00 100 (Testy pro matematickou knihovnu, doxyfile, drobne opravy, vstupy pro profiling)
+xlebed12 100 (Uzivatelska prirucka, isntalacni balicek, doxyfile, drobne opravy)
+xsikul15 100 (Matematicka knihovna, doxyfile, drobne opravy)
+xpavel39 100 (Uzivatelske rozhrani, profiling, mockup, doxyfile, drobne opravy)
 
