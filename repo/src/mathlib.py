@@ -13,10 +13,10 @@ import signal
 #	Evaluation and calculation is based on calling of sumbit()
 
 
-
+## Variable with function to be called
+set_expr = None
 ## Function for comunication with other scripts
 #   @param  foo     function to be called
-set_expr = None
 def set_set_expr(foo):
     global set_expr
     set_expr = foo
