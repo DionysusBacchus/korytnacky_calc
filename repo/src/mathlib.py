@@ -139,7 +139,7 @@ def avg(l):
 ##  Function sums the squares of all given values
 #   @param  l   list holding the data
 def sum_squares(l):
-    sum = 0;
+    sum = 0
     for x in l:
         sum += (x ** 2)
     return sum
