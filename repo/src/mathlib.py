@@ -1,6 +1,6 @@
 ##
 # @file mathlib.py
-# @author Jakub Sikula
+# @author Jakub Sikula xsikl15
 #
 
 from math import *
@@ -15,8 +15,8 @@ import signal
 
 ## Variable with function to be called
 set_expr = None
-## Function for comunication with other scripts
-#   @param  foo     function to be called
+## Function for comunication with other script
+#   @param  foo     function to be assigned
 def set_set_expr(foo):
     global set_expr
     set_expr = foo
