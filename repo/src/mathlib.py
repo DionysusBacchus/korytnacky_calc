@@ -15,15 +15,15 @@ import signal
 
 
 ## Function for comunication with other scripts
-#   @param  foo     to do
+#   @param  foo     function to be called
 set_expr = None
 def set_set_expr(foo):
     global set_expr
     set_expr = foo
 
 ##  Function which handles error in case of infite calucluation
-#   @param  num     to do
-#   @param  stack   to do
+#   @param  num     signal num
+#   @param  stack   signal stack
 def timeout_handler(num, stack):
     raise Exception("Takes too long to calculate")
     
@@ -87,7 +87,6 @@ def convert(string):
 #   @param  string  data to evaluate and calculate
 def submit(string):
     global Ans
-    #print ("Previous ans= " + str(Ans))
     string = convert(string)
     if "CATCH" in string:
         set_expr("Neplatný vstup")
@@ -97,9 +96,7 @@ def submit(string):
         signal.alarm(8)
         try:
             answer = 0
-            #print (string)
             answer = eval(string,globals())
-            #print (answer)
         finally:
             signal.alarm(0)
     
@@ -125,10 +122,8 @@ def submit(string):
     else:
         
         answer = ('%.15f' % float(answer)).rstrip('0').rstrip('.')
-        #print (answer)
         set_expr(answer)
         Ans = answer
-        #print (Ans)
         return float(answer)
 
 ##  Function returns the average vale of given data
