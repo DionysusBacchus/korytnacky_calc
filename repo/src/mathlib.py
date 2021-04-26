@@ -1,6 +1,6 @@
 ##
 # @file mathlib.py
-# @author Jakub Sikula xsikl15
+# @author Jakub Sikula xsikul15
 #
 
 from math import *

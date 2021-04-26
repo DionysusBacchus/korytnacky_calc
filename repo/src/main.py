@@ -1,5 +1,5 @@
 ##
-#   @file UI.py
+#   @file main.py
 #   @brief Entrypoint for calculator program. Creates a UI object, links it with mathlib.py and starts main loop.
 #
 

@@ -7,7 +7,7 @@ import tkinter as tk
 
 
 ##
-# 	@biref Class that creates a window with all UI elements for a calculator.
+# 	@brief Class that creates a window with all UI elements for a calculator.
 #	Window is displayed when the 'start_loop()' function is called.
 class UI():
 	## 	Root window
