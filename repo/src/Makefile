@@ -1,21 +1,17 @@
 #Project Makefile
-.PHONY all clean pack test run doc profile
+.PHONY: all clean doc
 	
-all:
-	python3 main.py
-	python3 profiling.py
-clean:
-
+all: run 
+clean: 
+	rm -rf __pycache__ 
 pack:
-	#TODO	
-test:
+	zip -r ~/xkhrys00_xlebed12_xsikul15_xpavel39.zip ~/xkhrys00_xlebed12_xsikul15_xpavel39/ 
+test: test_mathlib.py
 	python3 test_mathlib.py
-run:
-	#ma to spoustet program
+run: main.py
 	python3 main.py
-doc:
+doc: Doxyfile
 	doxygen Doxyfile
-	
-profile:
+profile: profiling.py
 	python3 profiling.py
 
