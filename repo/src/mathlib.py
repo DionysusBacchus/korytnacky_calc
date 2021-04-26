@@ -1,16 +1,13 @@
 ##
 # @file mathlib.py
 # @author Jakub Sikula xsikul15
+# @brief Library which contains funcitons that evaluate and calculate math problems. Evaluation and calculation is based on calling of sumbit().
 #
 
 from math import *
 import re
 import UI 
 import signal
-
-##
-# 	@brief library which contains funcitons that evaluate and calculate math problems
-#	Evaluation and calculation is based on calling of sumbit()
 
 
 ## Variable with function to be called

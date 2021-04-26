@@ -1,6 +1,7 @@
 ##
 # @file UI.py
 # @author Martin Pavella xpavel39
+# @brief File containing the UI class, which handles the graphical user interface.
 #
 
 import tkinter as tk
